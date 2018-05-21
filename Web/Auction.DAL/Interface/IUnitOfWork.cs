@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Auction.DAL.Interface
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork:IDisposable
     {
         IRepository<ApplicationProfile> Profiles { get; }
         IRepository<Lot> Lots { get;}
