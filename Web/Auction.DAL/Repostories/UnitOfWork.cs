@@ -16,14 +16,14 @@ namespace Auction.DAL.Repostories
         LotMarketContext db;
         IRepository<Lot> lots;
         IRepository<ApplicationProfile> profiles;
+        public ApplicationUserManager UserManager { get; }
+        public ApplicationRoleManager RoleManager { get; }
         public UnitOfWork(string connectionString)
         {
             db = new LotMarketContext(connectionString);
             UserManager = new ApplicationUserManager(new UserStore<ApplicationUser>(db));
             RoleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(db));
         }
-        public ApplicationUserManager UserManager { get; }
-        public ApplicationRoleManager RoleManager { get; }
         public IRepository<Lot> Lots
         {
             get
