@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Auction.DAL.EF
 {
-    class LotMarketContext:IdentityDbContext<ApplicationUser>
+    public class LotMarketContext:IdentityDbContext<ApplicationUser>
     {
         public LotMarketContext(string connectionString)
             : base(connectionString)
