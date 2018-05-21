@@ -10,10 +10,10 @@ namespace Auction.DAL.Interface
 {
     public interface IUnitOfWork
     {
-        IRepository<ApplicationProfile> Profiles { get; set; }
-        IRepository<Lot> Lots { get; set; }
-        ApplicationUserManager UserManager { get; set; }
-        ApplicationRoleManager RoleManager { get; set; }
+        IRepository<ApplicationProfile> Profiles { get; }
+        IRepository<Lot> Lots { get;}
+        ApplicationUserManager UserManager { get;}
+        ApplicationRoleManager RoleManager { get;}
         Task SaveAsync();
     }
 }
