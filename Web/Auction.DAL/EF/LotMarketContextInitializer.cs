@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Auction.DAL.Entities;
+using Auction.DAL.Identity;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -11,9 +15,10 @@ namespace Auction.DAL.EF
     {
         protected override void Seed(LotMarketContext context)
         {
-            var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
+            var userManager = new ApplicationRoleManager(new UserStore<ApplicationUser>(context));
 
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var roleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(context));
+
             base.Seed(context);
         }
     }
