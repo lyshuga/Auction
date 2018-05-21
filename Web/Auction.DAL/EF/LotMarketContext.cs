@@ -11,6 +11,10 @@ namespace Auction.DAL.EF
 {
     class LotMarketContext:IdentityDbContext<ApplicationUser>
     {
+        public LotMarketContext(string connectionString)
+            : base(connectionString)
+        {
+        }
         public DbSet<ApplicationProfile> Profiles;
         public DbSet<Lot> Lots;
 
