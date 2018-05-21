@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Auction.DAL.Repostories
+namespace Auction.DAL.Market.Repostories
 {
     public class LotRepository : IRepository<Lot>
     {

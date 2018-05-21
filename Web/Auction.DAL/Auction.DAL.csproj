@@ -61,12 +61,14 @@
     <Compile Include="Entities\Lot.cs" />
     <Compile Include="Identity\ApplicationRoleManager.cs" />
     <Compile Include="Identity\ApplicationUserManager.cs" />
+    <Compile Include="Interface\IMarketUnitOfWork.cs" />
     <Compile Include="Interface\IRepository.cs" />
-    <Compile Include="Interface\IUnitOfWork.cs" />
+    <Compile Include="Interface\IIdentityUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repostories\UnitOfWork.cs" />
-    <Compile Include="Repostories\LotRepository.cs" />
-    <Compile Include="Repostories\ProfileRepository.cs" />
+    <Compile Include="Repostories\IdentityUnitOfWork.cs" />
+    <Compile Include="Repostories\Market\LotRepository.cs" />
+    <Compile Include="Repostories\MarketUnitOfWork.cs" />
+    <Compile Include="Repostories\Market\ProfileRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

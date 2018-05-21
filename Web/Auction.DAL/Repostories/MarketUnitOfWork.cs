@@ -1,8 +1,7 @@
 ﻿using Auction.DAL.EF;
 using Auction.DAL.Entities;
-using Auction.DAL.Identity;
 using Auction.DAL.Interface;
-using Microsoft.AspNet.Identity.EntityFramework;
+using Auction.DAL.Market.Repostories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,18 +10,14 @@ using System.Threading.Tasks;
 
 namespace Auction.DAL.Repostories
 {
-    public class UnitOfWork : IUnitOfWork
+    public class MarketUnitOfWork : IMarketUnitOfWork
     {
         LotMarketContext db;
         IRepository<Lot> lots;
         IRepository<ApplicationProfile> profiles;
-        public ApplicationUserManager UserManager { get; }
-        public ApplicationRoleManager RoleManager { get; }
-        public UnitOfWork(string connectionString)
+        public MarketUnitOfWork(LotMarketContext context)
         {
-            db = new LotMarketContext(connectionString);
-            UserManager = new ApplicationUserManager(new UserStore<ApplicationUser>(db));
-            RoleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(db));
+            db = context;
         }
         public IRepository<Lot> Lots
         {
@@ -46,7 +41,11 @@ namespace Auction.DAL.Repostories
                 return profiles;
             }
         }
-        
+
+        public void Dispose()
+        {
+            db.Dispose();
+        }
 
         public async Task SaveAsync()
         {
