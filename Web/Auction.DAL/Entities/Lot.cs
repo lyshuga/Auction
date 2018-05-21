@@ -30,5 +30,7 @@ namespace Auction.DAL.Entities
         public DateTime StartDate { get; set; }
         [Required]
         public DateTime ExpireDate { get; set; }
+        [Required]
+        public DateTime LastBid { get; set; }
     }
 }
