@@ -13,6 +13,7 @@ namespace Auction.DAL.Entities
         public string Id { get; set; }
         public string UserName { get; set; }
         public decimal Balance { get; set; }
+        public string CreditCard { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
 
         public virtual ICollection<Lot> AuctionedLots { get; set; }
