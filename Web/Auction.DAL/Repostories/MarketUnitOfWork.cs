@@ -44,7 +44,7 @@ namespace Auction.DAL.Repostories
 
         public void Dispose()
         {
-            db.Dispose();
+            //db.Dispose();
         }
 
         public async Task SaveAsync()
