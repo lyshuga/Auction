@@ -11,7 +11,7 @@ namespace Auction.DAL.Entities
     {
         [ForeignKey("ApplicationUser")]
         public string Id { get; set; }
-        public string UserName { get; set; }
+        public string Name { get; set; }
         public decimal Balance { get; set; }
         public string CreditCard { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
