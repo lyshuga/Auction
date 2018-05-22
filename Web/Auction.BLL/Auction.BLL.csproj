@@ -61,6 +61,7 @@
     <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="BusinessModels\ImageConverter.cs" />
     <Compile Include="BusinessModels\GoodType.cs" />
+    <Compile Include="Infrastructure\Exceptions\ValidateException.cs" />
     <Compile Include="Infrastructure\OperationDetails.cs" />
     <Compile Include="Infrastructure\ServiceModule.cs" />
     <Compile Include="Interface\IIdentityService.cs" />

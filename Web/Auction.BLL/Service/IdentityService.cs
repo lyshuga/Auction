@@ -10,6 +10,7 @@ using Auction.DAL.Interface;
 using Auction.BLL.Infrastructure;
 using Auction.DAL.Entities;
 using Microsoft.AspNet.Identity;
+using Auction.BLL.Infrastructure.Exceptions;
 
 namespace Auction.BLL.Service
 {
@@ -26,18 +27,18 @@ namespace Auction.BLL.Service
             {
                 if (string.IsNullOrEmpty(userDto.Email) || string.IsNullOrEmpty(userDto.Password))
                 {
-                    //TODO: 
+                    throw new ValidateException("Email or password is invalid");
                 }
                 ClaimsIdentity claim = null;
-                // находим пользователя
+                
                 ApplicationUser user = await Database.UserManager.FindAsync(userDto.Email, userDto.Password);
-                // авторизуем его и возвращаем объект ClaimsIdentity
+                
                 if (user != null)
                     claim = await Database.UserManager.CreateIdentityAsync(user,
                                                 DefaultAuthenticationTypes.ApplicationCookie);
                 return claim;
             }
-            return null;
+            throw new ArgumentNullException("UserDTO is null");
         }
 
         public async Task<Result> CreateAsync(UserDTO userDto)
@@ -73,7 +74,6 @@ namespace Auction.BLL.Service
                     await Database.RoleManager.CreateAsync(role);
                 }
             }
-
             await CreateAsync(adminDto);
         }
 
