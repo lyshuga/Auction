@@ -83,6 +83,14 @@ namespace Auction.BLL.Service
             Database?.Dispose();
         }
 
-        
+        public Task<Result> DeleteUserAsync(string Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Result> EditUserAsync(UserDTO userDto)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

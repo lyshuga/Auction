@@ -13,6 +13,8 @@ namespace Auction.BLL.Interface
     {
         Task<Result> CreateAsync(UserDTO userDto);
         Task<ClaimsIdentity> Authenticate(UserDTO userDto);
+        Task<Result> DeleteUserAsync(string Id);
+        Task<Result> EditUserAsync(UserDTO userDto);
         Task SetInitialData(UserDTO adminDto, List<string> roles);
     }
 }

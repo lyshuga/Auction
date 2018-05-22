@@ -20,7 +20,7 @@ namespace Auction.BLL.Service
         {
             Database = iuw;
         }
-        public void CreateLot(LotDTO lotDTO)
+        public Result CreateLot(LotDTO lotDTO)
         {
             if (lotDTO != null)
             {
@@ -29,6 +29,7 @@ namespace Auction.BLL.Service
                 Lot lot = mapper.Map<LotDTO, Lot>(lotDTO);
                 Database.Lots.Create(lot);
                 Database.SaveAsync();
+                return new Result(true, $"Lot {lotDTO.Name} is created", "");
             }
             throw new ArgumentNullException("lotDTO is null");
         }
@@ -40,13 +41,12 @@ namespace Auction.BLL.Service
             {
                 throw new ArgumentNullException("UserDTO is null");
             }
-
+            var lots = Database.Lots.Find(x => x.SellerId == userDTO.Id);
+            var mapper = LotToLotDTO.CreateMap();
+            var lotDTOs = mapper.Map<IEnumerable<Lot>, IEnumerable<LotDTO>>(lots);
+            return lotDTOs;
         }
-
-        public UserDTO GetUser(string userID)
-        {
-            throw new NotImplementedException();
-        }
+        
         public void Dispose()
         {
             Database?.Dispose();
@@ -58,6 +58,16 @@ namespace Auction.BLL.Service
         }
 
         public Task<Result> EditLotAsync(LotDTO lotDTO)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<UserDTO> GetProfile(string userID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<LotDTO> GetLot(string lotId)
         {
             throw new NotImplementedException();
         }

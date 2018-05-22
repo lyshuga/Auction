@@ -28,6 +28,8 @@ namespace Auction.Web
             ControllerModule controller = new ControllerModule();
             var kernel = new StandardKernel(service, controller);
             DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
+            ModelValidatorProviders.Providers.Clear();
+            //FluentValidationModelValidatorProvider.Configure(provider => provider.AddImplicitRequiredValidator = false);
         }
     }
 }
