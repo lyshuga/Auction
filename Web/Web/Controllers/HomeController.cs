@@ -33,9 +33,8 @@ namespace Web.Controllers
         }
         public async Task<string> Create()
         {
-
             IdentityService service = new IdentityService(new IdentityUnitOfWork("DefaultConnection"));
-            UserDTO user = new UserDTO() { Name = "Kolia", Email = "kolia@gmail.com", Password = "pukpuk", Role = "admin" };
+            UserDTO user = new UserDTO() { Name = "Kolia", Email = "kolia@gmail.com", Password = "pukpuk", Role = "admin", Balance = 238, CreditCard = "1234567890" };
             Result result = await service.CreateAsync(user);
             return result.Message;
         }
