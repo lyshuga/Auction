@@ -55,12 +55,13 @@ namespace Auction.BLL.Service
                 // создаем профиль клиента
                 ApplicationProfile clientProfile = new ApplicationProfile { Id = user.Id, Name = userDto.Name, Balance = userDto.Balance, CreditCard = userDto.CreditCard };
                 user.ApplicationProfile = clientProfile;
+                var list = Database.UserManager.Users.ToList();
                 await Database.SaveAsync();
-                return new Result(true, "Регистрация успешно пройдена", "");
+                return new Result(true, "", "");
             }
             else
             {
-                return new Result(false, "Пользователь с таким логином уже существует", "Email");
+                return new Result(false, $"The user with {userDto.Email} is already registered", "Email");
             }
         }
         public async Task SetInitialData(UserDTO adminDto, List<string> roles)

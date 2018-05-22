@@ -27,7 +27,7 @@ namespace Auction.DAL.EF
             roleManager.Create(role2);
             roleManager.Create(role3);
 
-            var admin = new ApplicationUser { Email = "admin@gmail.com" };
+            var admin = new ApplicationUser { Email = "admin@gmail.com", UserName = "admin@gmail.com" };
             string password = "adminKiller";
             var result = userManager.Create(admin, password);
 
@@ -39,7 +39,7 @@ namespace Auction.DAL.EF
                 userManager.AddToRole(admin.Id, role2.Name);
             }
 
-            var user = new ApplicationUser { Email = "user@gmail.com" };
+            var user = new ApplicationUser { Email = "user@gmail.com", UserName = "user@gmail.com" };
             password = "userBoy";
             result = userManager.Create(user, password);
 
@@ -49,6 +49,7 @@ namespace Auction.DAL.EF
                 // добавляем для пользователя роль
                 userManager.AddToRole(user.Id, role3.Name);
             }
+            var list = userManager.Users.ToList();
             context.SaveChanges();
             base.Seed(context);
         }

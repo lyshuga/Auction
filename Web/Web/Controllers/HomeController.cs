@@ -10,8 +10,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 
-namespace Web.Controllers
+namespace Auction.Web.Controllers
 {
     public class HomeController : Controller
     {
@@ -19,11 +20,11 @@ namespace Web.Controllers
         private IIdentityService IdentityService { get; set; }
         [Inject]
         private IMarketService MarketService { get; set; }
-        //public HomeController(IIdentityService identity, IMarketService market)
-        //{
-        //    IdentityService = identity;
-        //    MarketService = market;
-        //}
+        public HomeController(IIdentityService identity, IMarketService market)
+        {
+            IdentityService = identity;
+            MarketService = market;
+        }
         public ActionResult Index()
         {
             return View();
@@ -42,11 +43,11 @@ namespace Web.Controllers
 
             return View();
         }
-        public async Task<string> Create()
+        public async Task<ActionResult> Create()
         {
             UserDTO user = new UserDTO() { Name = "Kolia", Email = "kolia@gmail.com", Password = "pukpuk", Role = "admin", Balance = 238, CreditCard = "1234567890" };
             Result result = await IdentityService.CreateAsync(user);
-            return result.Message;
+            return Content(result.Message);
         }
         public void CreateLot()
         {

@@ -9,17 +9,12 @@ using Ninject.Modules;
 
 namespace Web.Util
 {
-    public class ServiceModule : NinjectModule
+    public class ControllerModule : NinjectModule
     {
-        private string connectionString;
-        public ServiceModule(string connection)
-        {
-            connectionString = connection;
-        }
         public override void Load()
         {
-            Bind<IIdentityService>().To<IdentityService>().WithConstructorArgument(connectionString);
-            Bind<IMarketService>().To<MarketService>().WithConstructorArgument(connectionString);
+            Bind<IIdentityService>().To<IdentityService>();
+            Bind<IMarketService>().To<MarketService>();
         }
     }
 }
