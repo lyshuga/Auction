@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Auction.BLL.BusinessModels.Profiles;
 using Auction.DAL.Entities;
+using Auction.BLL.Infrastructure;
 
 namespace Auction.BLL.Service
 {
@@ -27,15 +28,19 @@ namespace Auction.BLL.Service
 
                 Lot lot = mapper.Map<LotDTO, Lot>(lotDTO);
                 Database.Lots.Create(lot);
-                var list = Database.Lots.GetAll();
                 Database.SaveAsync();
             }
+            throw new ArgumentNullException("lotDTO is null");
         }
         
 
         public IEnumerable<LotDTO> GetLots(UserDTO userDTO)
         {
-            throw new NotImplementedException();
+            if (userDTO == null)
+            {
+                throw new ArgumentNullException("UserDTO is null");
+            }
+
         }
 
         public UserDTO GetUser(string userID)
@@ -45,6 +50,16 @@ namespace Auction.BLL.Service
         public void Dispose()
         {
             Database?.Dispose();
+        }
+
+        public Task<Result> DeleteLotAsync(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Result> EditLotAsync(LotDTO lotDTO)
+        {
+            throw new NotImplementedException();
         }
     }
 }

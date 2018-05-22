@@ -17,6 +17,7 @@ namespace Auction.BLL.BusinessModels.Profiles
             config = new MapperConfiguration(cfg => {
 
                 cfg.CreateMap<LotDTO, Lot>()
+                .ForMember("Id", c => c.MapFrom(s => s.Id))
                 .ForMember("Name", c => c.MapFrom(s => s.Name))
                 .ForMember("Description", c => c.MapFrom(s => s.Description))
                 .ForMember("GoodType", c => c.MapFrom(s => s.GoodType))

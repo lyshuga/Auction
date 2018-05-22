@@ -10,6 +10,7 @@ namespace Auction.BLL.DTO
 {
     public class LotDTO
     {
+        public string Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string GoodType { get; set; }
