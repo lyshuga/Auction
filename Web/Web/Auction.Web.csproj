@@ -275,6 +275,16 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Auction.BLL\Auction.BLL.csproj">
+      <Project>{7c6c243b-e27e-4261-857d-bc2d26eca6ff}</Project>
+      <Name>Auction.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Auction.DAL\Auction.DAL.csproj">
+      <Project>{3F90A243-65A7-4D92-BB2E-FFF3CCA35B58}</Project>
+      <Name>Auction.DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

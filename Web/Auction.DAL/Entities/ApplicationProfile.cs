@@ -10,7 +10,6 @@ namespace Auction.DAL.Entities
 {
     public class ApplicationProfile
     {
-        [Required]
         [ForeignKey("ApplicationUser")]
         public string Id { get; set; }
         [Required]

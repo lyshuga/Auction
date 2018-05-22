@@ -11,7 +11,7 @@ namespace Auction.BLL.Interface
 {
     public interface IIdentityService
     {
-        Task<Result> Create(UserDTO userDto);
+        Task<Result> CreateAsync(UserDTO userDto);
         Task<ClaimsIdentity> Authenticate(UserDTO userDto);
         Task SetInitialData(UserDTO adminDto, List<string> roles);
     }

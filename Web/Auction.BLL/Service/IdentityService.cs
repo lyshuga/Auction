@@ -15,6 +15,10 @@ namespace Auction.BLL.Service
     public class IdentityService : IIdentityService
     {
         IIdentityUnitOfWork Database;
+        public IdentityService(IIdentityUnitOfWork iuw)
+        {
+            Database = iuw;
+        }
         public async Task<ClaimsIdentity> Authenticate(UserDTO userDto)
         {
             if (userDto != null)
@@ -23,12 +27,12 @@ namespace Auction.BLL.Service
                 {
                     //TODO: 
                 }
-                ApplicationUser user = await Database.UserManager.FindByEmailAsync(userDto.Email);
-
+                
             }
+            return null;
         }
 
-        public async Task<Result> Create(UserDTO userDto)
+        public async Task<Result> CreateAsync(UserDTO userDto)
         {
             ApplicationUser user = await Database.UserManager.FindByEmailAsync(userDto.Email);
             if (user == null)
@@ -40,8 +44,8 @@ namespace Auction.BLL.Service
                 // добавляем роль
                 await Database.UserManager.AddToRoleAsync(user.Id, userDto.Role);
                 // создаем профиль клиента
-                ClientProfile clientProfile = new ClientProfile { Id = user.Id, Address = userDto.Address, Name = userDto.Name };
-                Database.ClientManager.Create(clientProfile);
+                ApplicationProfile clientProfile = new ApplicationProfile { Id = user.Id, Name = userDto.Name, Balance = userDto.Balance, CreditCard = userDto.CreditCard };
+                user.ApplicationProfile = clientProfile;
                 await Database.SaveAsync();
                 return new Result(true, "Регистрация успешно пройдена", "");
             }

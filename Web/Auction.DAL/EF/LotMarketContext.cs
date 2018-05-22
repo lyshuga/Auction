@@ -12,14 +12,16 @@ namespace Auction.DAL.EF
     public class LotMarketContext:IdentityDbContext<ApplicationUser>
     {
         public LotMarketContext(string connectionString)
-            : base(connectionString)
+            : base(connectionString, throwIfV1Schema: false)
         {
+            Database.SetInitializer<LotMarketContext>(new LotMarketContextInitializer());
         }
         public DbSet<ApplicationProfile> Profiles;
         public DbSet<Lot> Lots;
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Lot>()
                         .HasRequired(m => m.Seller)
                         .WithMany(t => t.AuctionedLots)
