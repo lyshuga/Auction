@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Auction.DAL.Interface;
 using Auction.BLL.Infrastructure;
 using Auction.DAL.Entities;
+using Microsoft.AspNet.Identity;
 
 namespace Auction.BLL.Service
 {
@@ -27,7 +28,14 @@ namespace Auction.BLL.Service
                 {
                     //TODO: 
                 }
-                
+                ClaimsIdentity claim = null;
+                // находим пользователя
+                ApplicationUser user = await Database.UserManager.FindAsync(userDto.Email, userDto.Password);
+                // авторизуем его и возвращаем объект ClaimsIdentity
+                if (user != null)
+                    claim = await Database.UserManager.CreateIdentityAsync(user,
+                                                DefaultAuthenticationTypes.ApplicationCookie);
+                return claim;
             }
             return null;
         }
@@ -54,10 +62,26 @@ namespace Auction.BLL.Service
                 return new Result(false, "Пользователь с таким логином уже существует", "Email");
             }
         }
-
         public async Task SetInitialData(UserDTO adminDto, List<string> roles)
         {
-            throw new NotImplementedException();
+            foreach (string roleName in roles)
+            {
+                var role = await Database.RoleManager.FindByNameAsync(roleName);
+                if (role == null)
+                {
+                    role = new ApplicationRole { Name = roleName };
+                    await Database.RoleManager.CreateAsync(role);
+                }
+            }
+
+            await CreateAsync(adminDto);
         }
+
+        public void Dispose()
+        {
+            Database?.Dispose();
+        }
+
+        
     }
 }

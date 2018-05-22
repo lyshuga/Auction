@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Auction.BLL.Interface
 {
-    public interface IIdentityService
+    public interface IIdentityService:IDisposable
     {
         Task<Result> CreateAsync(UserDTO userDto);
         Task<ClaimsIdentity> Authenticate(UserDTO userDto);

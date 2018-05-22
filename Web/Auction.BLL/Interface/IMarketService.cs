@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Auction.BLL.Interface
 {
-    public interface IMarketService
+    public interface IMarketService:IDisposable
     {
 
         void CreateLot(LotDTO lotDTO);
