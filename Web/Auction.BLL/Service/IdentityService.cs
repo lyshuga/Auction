@@ -57,7 +57,7 @@ namespace Auction.BLL.Service
                 user.ApplicationProfile = clientProfile;
                 var list = Database.UserManager.Users.ToList();
                 await Database.SaveAsync();
-                return new Result(true, "You are registered", "");
+                return new Result(true, $"User {userDto.Email} has been registered", "");
             }
             else
             {

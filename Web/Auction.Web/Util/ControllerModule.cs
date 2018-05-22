@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Auction.BLL.Interface;
 using Auction.BLL.Service;
 using Ninject.Modules;
+using Ninject.Web.Common;
 
 namespace Auction.Web.Util
 {
@@ -13,8 +14,8 @@ namespace Auction.Web.Util
     {
         public override void Load()
         {
-            Bind<IIdentityService>().To<IdentityService>();
-            Bind<IMarketService>().To<MarketService>();
+            Bind<IIdentityService>().To<IdentityService>().InRequestScope();
+            Bind<IMarketService>().To<MarketService>().InRequestScope();
         }
     }
 }

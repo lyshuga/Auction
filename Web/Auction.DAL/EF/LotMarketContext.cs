@@ -16,6 +16,10 @@ namespace Auction.DAL.EF
         {
             
         }
+        public LotMarketContext()
+            : base("DefaultConnection", throwIfV1Schema: false)
+        {
+        }
         public DbSet<ApplicationProfile> Profiles { get; set; }
         public DbSet<Lot> Lots { get; set; }
 

@@ -27,6 +27,7 @@ namespace Auction.BLL.Service
 
                 Lot lot = mapper.Map<LotDTO, Lot>(lotDTO);
                 Database.Lots.Create(lot);
+                var list = Database.Lots.GetAll();
                 Database.SaveAsync();
             }
         }
