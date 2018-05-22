@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="DTO\LotDTO.cs" />
     <Compile Include="DTO\UserDTO.cs" />
+    <Compile Include="Infrastructure\ImageConverter.cs" />
     <Compile Include="Infrastructure\GoodType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
