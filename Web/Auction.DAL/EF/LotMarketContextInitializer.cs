@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Auction.DAL.EF
 {
-    class LotMarketContextInitializer: DropCreateDatabaseAlways<LotMarketContext>
+    public class LotMarketContextInitializer: DropCreateDatabaseAlways<LotMarketContext>
     {
         protected override void Seed(LotMarketContext context)
         {
@@ -49,6 +49,7 @@ namespace Auction.DAL.EF
                 // добавляем для пользователя роль
                 userManager.AddToRole(user.Id, role3.Name);
             }
+            context.SaveChanges();
             base.Seed(context);
         }
     }

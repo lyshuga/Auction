@@ -14,10 +14,10 @@ namespace Auction.DAL.EF
         public LotMarketContext(string connectionString)
             : base(connectionString, throwIfV1Schema: false)
         {
-            Database.SetInitializer<LotMarketContext>(new LotMarketContextInitializer());
+            
         }
-        public DbSet<ApplicationProfile> Profiles;
-        public DbSet<Lot> Lots;
+        public DbSet<ApplicationProfile> Profiles { get; set; }
+        public DbSet<Lot> Lots { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

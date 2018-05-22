@@ -24,7 +24,9 @@ namespace Auction.BLL.BusinessModels.Profiles
                 .ForMember("Price", c => c.MapFrom(s => s.Price))
                 .ForMember("StartDate", c => c.MapFrom(s => s.StartDate))
                 .ForMember("ExpireDate", c => c.MapFrom(s => s.ExpireDate))
-                .ForMember("LastBid", c => c.MapFrom(s => s.LastBid));
+                .ForMember("LastBid", c => c.MapFrom(s => s.LastBid))
+                .ForMember("BidderId", c => c.MapFrom(s => s.BidderId))
+                .ForMember("SellerId", c => c.MapFrom(s => s.SellerId));
 
             });
         }

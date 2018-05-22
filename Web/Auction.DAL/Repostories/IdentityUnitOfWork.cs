@@ -33,6 +33,7 @@ namespace Auction.DAL.Repostories
         public void Dispose()
         {
             // TODO: Check Dispose with and without Database
+            db.Dispose();
         }
 
         //#region IDisposable Support

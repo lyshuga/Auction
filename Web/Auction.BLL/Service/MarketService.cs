@@ -24,8 +24,10 @@ namespace Auction.BLL.Service
             if (lotDTO != null)
             {
                 var mapper = LotDTOToLot.CreateMap();
-                Lot lot = mapper.Map<LotDTO, Lot>(lotDTO);
 
+                Lot lot = mapper.Map<LotDTO, Lot>(lotDTO);
+                Database.Lots.Create(lot);
+                Database.SaveAsync();
             }
         }
         
@@ -41,7 +43,7 @@ namespace Auction.BLL.Service
         }
         public void Dispose()
         {
-            throw new NotImplementedException();
+            Database?.Dispose();
         }
     }
 }

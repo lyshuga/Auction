@@ -12,6 +12,10 @@ namespace Auction.BLL.BusinessModels
     {
         public static byte[] imageToByteArray(Image imageIn)
         {
+            if (imageIn == null)
+            {
+                return null;
+            }
             MemoryStream ms = new MemoryStream();
             imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
             return ms.ToArray();
@@ -19,6 +23,10 @@ namespace Auction.BLL.BusinessModels
 
         public static Image byteArrayToImage(byte[] byteArrayIn)
         {
+            if (byteArrayIn == null)
+            {
+                return null;
+            }
             MemoryStream ms = new MemoryStream(byteArrayIn);
             Image returnImage = Image.FromStream(ms);
             return returnImage;

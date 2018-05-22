@@ -15,7 +15,23 @@ namespace Auction.Test
         [Test]
         public void Create_ShouldBeNoExcpetions()
         {
-            MarketService marketService = new MarketService(new MarketUnitOfWork("DefaultConnection"))
+            MarketService marketService = new MarketService(new MarketUnitOfWork("DefaultConnection"));
+            string kyky = "Kyky";
+            marketService.CreateLot(new BLL.DTO.LotDTO()
+            {
+                Name = kyky,
+                Description = kyky,
+                Price = 200,
+                ExpireDate = DateTime.Now
+            ,
+                GoodType = kyky,
+                LastBid = DateTime.Now
+            ,
+                StartDate = DateTime.Now
+            ,
+                Photo = new System.Drawing.Bitmap(100, 100)
+            });
+
         }
     }
 }
