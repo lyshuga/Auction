@@ -60,5 +60,11 @@ namespace Auction.Web.Controllers
             }
             return View(model);
         }
+        [HttpGet]
+        public ActionResult Register(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
     }
 }
