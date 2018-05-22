@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Auction.BLL.Infrastructure
+namespace Auction.BLL.BusinessModels
 {
     public static class ImageConverter
     {

@@ -56,13 +56,17 @@
   <ItemGroup>
     <Compile Include="DTO\LotDTO.cs" />
     <Compile Include="DTO\UserDTO.cs" />
-    <Compile Include="Infrastructure\ImageConverter.cs" />
+    <Compile Include="BusinessModels\ImageConverter.cs" />
     <Compile Include="Infrastructure\GoodType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interface\" />
+    <Folder Include="Service\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
