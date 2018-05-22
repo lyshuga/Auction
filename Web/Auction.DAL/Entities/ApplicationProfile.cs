@@ -16,7 +16,6 @@ namespace Auction.DAL.Entities
         public string Name { get; set; }
         [Required]
         public decimal Balance { get; set; }
-        [Required]
         public string CreditCard { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
 
