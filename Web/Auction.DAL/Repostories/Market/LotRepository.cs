@@ -19,6 +19,7 @@ namespace Auction.DAL.Market.Repostories
         }
         public void Create(Lot item)
         {
+            var hash = db.Database.Connection.GetHashCode();
             db.Lots.Add(item);
         }
 
@@ -44,7 +45,7 @@ namespace Auction.DAL.Market.Repostories
 
         public IEnumerable<Lot> GetAll()
         {
-            return db.Lots;
+            return db.Lots.ToList();
         }
 
         public void Update(Lot item)

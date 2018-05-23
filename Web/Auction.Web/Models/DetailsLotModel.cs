@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
-using Auction.BLL.BusinessModels;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
 
-namespace Auction.BLL.DTO
+namespace Auction.Web.Models
 {
-    public class LotDTO
+    public class DetailsLotModel
     {
+        [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string GoodType { get; set; }
-        public byte[] Photo { get; set; }
+        public string Photo { get; set; }
         public decimal Price { get; set; }
         public string BidderId { get; set; }
         public string SellerId { get; set; }

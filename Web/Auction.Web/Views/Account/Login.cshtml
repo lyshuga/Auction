@@ -33,7 +33,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.RememberMe, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-1">
+            <div class="col-md-8">
                 <div class="checkbox">
                     @Html.EditorFor(model => model.RememberMe)
                     @Html.ValidationMessageFor(model => model.RememberMe, "", new { @class = "text-danger" })
@@ -43,22 +43,12 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Login" class="btn btn-default" />
             </div>
         </div>
 
     </div>
 }
-    <div class="row">
-        <div class="col-md-4">
-            @Html.ActionLink("Register", "Register", new { returnUrl = ViewBag.ReturnUrl })
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    </div>
     
 
 

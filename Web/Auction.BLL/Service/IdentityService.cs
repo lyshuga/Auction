@@ -50,9 +50,7 @@ namespace Auction.BLL.Service
                 var result = await Database.UserManager.CreateAsync(user, userDto.Password);
                 if (result.Errors.Count() > 0)
                     return new Result(false, result.Errors.FirstOrDefault(), "");
-                // добавляем роль
                 await Database.UserManager.AddToRoleAsync(user.Id, userDto.Role);
-                // создаем профиль клиента
                 ApplicationProfile clientProfile = new ApplicationProfile { Id = user.Id, Name = userDto.Name, Balance = userDto.Balance, CreditCard = userDto.CreditCard };
                 user.ApplicationProfile = clientProfile;
                 var list = Database.UserManager.Users.ToList();

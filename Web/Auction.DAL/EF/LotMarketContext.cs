@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
@@ -37,6 +38,9 @@ namespace Auction.DAL.EF
                         .WithMany(t => t.BiddenLots)
                         .HasForeignKey(m => m.BidderId)
                         .WillCascadeOnDelete(false);
+            modelBuilder.Entity<Lot>()
+                        .Property(c => c.Id)
+                        .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
         }
     }
 }

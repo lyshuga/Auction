@@ -24,6 +24,13 @@ namespace Auction.Web.Models
         [Display(Name = "Confirm Password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Text)]
+        public string Name { get; set; }
+
+        [DataType(DataType.CreditCard)]
+        public string CreditCard { get; set; }
 
         [Display(Name = "Remember Me")]
         public bool RememberMe { get; set; }

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using System.Drawing;
 
 namespace Auction.Web.Controllers
 {
@@ -49,27 +50,27 @@ namespace Auction.Web.Controllers
             Result result = await IdentityService.CreateAsync(user);
             return Content(result.Message);
         }
-        public void CreateLot()
-        {
+        //public void CreateLot()
+        //{
             
-            string kyky = "Kyky";
-            MarketService.CreateLot(new LotDTO()
-            {
-                Name = kyky,
-                Description = kyky,
-                Price = 200,
-                ExpireDate = DateTime.Now
-            ,
-                GoodType = kyky,
-                LastBid = DateTime.Now
-            ,
-                StartDate = DateTime.Now
-            ,
-                Photo = new System.Drawing.Bitmap(100, 100),
-                BidderId = "3e8299fc-ca28-4f6e-9ef9-c572a521be2f",
-                SellerId = "3e8299fc-ca28-4f6e-9ef9-c572a521be2f"
-            });
-        }
+        //    string kyky = "Kyky";
+        //    MarketService.CreateLot(new LotDTO()
+        //    {
+        //        Name = kyky,
+        //        Description = kyky,
+        //        Price = 200,
+        //        ExpireDate = DateTime.Now
+        //    ,
+        //        GoodType = kyky,
+        //        LastBid = DateTime.Now
+        //    ,
+        //        StartDate = DateTime.Now
+        //    ,
+        //        Photo = new byte[100],
+        //        BidderId = "3e8299fc-ca28-4f6e-9ef9-c572a521be2f",
+        //        SellerId = "3e8299fc-ca28-4f6e-9ef9-c572a521be2f"
+        //    });
+        //}
         protected override void Dispose(bool disposing)
         {
             if (disposing)

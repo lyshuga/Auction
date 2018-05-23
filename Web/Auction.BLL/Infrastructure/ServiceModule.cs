@@ -5,9 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Auction.BLL.Interface;
 using Auction.BLL.Service;
+using Auction.DAL.EF;
 using Auction.DAL.Interface;
 using Auction.DAL.Repostories;
 using Ninject.Modules;
+using Ninject.Web.Common;
 
 namespace Auction.BLL.Infrastructure
 {
@@ -20,8 +22,9 @@ namespace Auction.BLL.Infrastructure
         }
         public override void Load()
         {
-            Bind<IIdentityUnitOfWork>().To<IdentityUnitOfWork>().WithConstructorArgument(connectionString);
-            Bind<IMarketUnitOfWork>().To<MarketUnitOfWork>().WithConstructorArgument(connectionString);
+            Bind<LotMarketContext>().To<LotMarketContext>().InRequestScope().WithConstructorArgument(connectionString);
+            Bind<IIdentityUnitOfWork>().To<IdentityUnitOfWork>().InRequestScope();
+            Bind<IMarketUnitOfWork>().To<MarketUnitOfWork>().InRequestScope();
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Auction.Web.Models
             [Display(Name = "Password")]
             public string Password { get; set; }
 
-            [Display(Name = "Запомнить меня")]
+            [Display(Name = "Remember Me  ")]
             public bool RememberMe { get; set; }
         }
 }

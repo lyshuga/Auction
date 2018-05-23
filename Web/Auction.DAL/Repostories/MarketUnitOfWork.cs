@@ -15,9 +15,9 @@ namespace Auction.DAL.Repostories
         LotMarketContext db;
         IRepository<Lot> lots;
         IRepository<ApplicationProfile> profiles;
-        public MarketUnitOfWork(string connectionString)
+        public MarketUnitOfWork(LotMarketContext db)
         {
-            db = new LotMarketContext(connectionString);
+            this.db = db;
         }
         public IRepository<Lot> Lots
         {

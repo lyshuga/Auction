@@ -7,13 +7,13 @@ namespace Auction.DAL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Migration : IMigrationMetadata
+    public sealed partial class Migration1 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Migration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Migration1));
         
         string IMigrationMetadata.Id
         {
-            get { return "201805221317577_Migration"; }
+            get { return "201805222149189_Migration1"; }
         }
         
         string IMigrationMetadata.Source

@@ -14,8 +14,8 @@ namespace Auction.BLL.Interface
         Task<Result> DeleteLotAsync(string id);
         Task<Result> EditLotAsync(LotDTO lotDTO);
 
-        Task<UserDTO> GetProfile(string userID);
+        UserDTO GetProfile(string userID);
         IEnumerable<LotDTO> GetLots(UserDTO userDTO);
-        Task<LotDTO> GetLot(string lotId);
+        Task<LotDTO> GetLotAsync(string lotId);
     }
 }

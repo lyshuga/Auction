@@ -3,7 +3,7 @@ namespace Auction.DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Migration : DbMigration
+    public partial class Migration1 : DbMigration
     {
         public override void Up()
         {
@@ -11,7 +11,7 @@ namespace Auction.DAL.Migrations
                 "dbo.Lots",
                 c => new
                     {
-                        Id = c.String(nullable: false, maxLength: 128),
+                        Id = c.Int(nullable: false, identity: true),
                         Name = c.String(nullable: false),
                         Description = c.String(nullable: false),
                         GoodType = c.String(nullable: false),

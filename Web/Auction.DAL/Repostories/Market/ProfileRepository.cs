@@ -34,7 +34,8 @@ namespace Auction.DAL.Market.Repostories
 
         public IEnumerable<ApplicationProfile> Find(Func<ApplicationProfile, bool> predicate)
         {
-            return db.Profiles.Where(predicate);
+            var hash = db.Database.Connection.GetHashCode();
+            return db.Profiles.Include(x => x.ApplicationUser).Where(predicate);
         }
 
         public async Task<ApplicationProfile> Get(int id)

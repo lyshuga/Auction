@@ -59,14 +59,15 @@
     <Compile Include="Entities\ApplicationRole.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Entities\Lot.cs" />
+    <Compile Include="Entities\Lottt.cs" />
     <Compile Include="Identity\ApplicationRoleManager.cs" />
     <Compile Include="Identity\ApplicationUserManager.cs" />
     <Compile Include="Interface\IMarketUnitOfWork.cs" />
     <Compile Include="Interface\IRepository.cs" />
     <Compile Include="Interface\IIdentityUnitOfWork.cs" />
-    <Compile Include="Migrations\201805221317577_Migration.cs" />
-    <Compile Include="Migrations\201805221317577_Migration.Designer.cs">
-      <DependentUpon>201805221317577_Migration.cs</DependentUpon>
+    <Compile Include="Migrations\201805222149189_Migration1.cs" />
+    <Compile Include="Migrations\201805222149189_Migration1.Designer.cs">
+      <DependentUpon>201805222149189_Migration1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,8 +81,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201805221317577_Migration.resx">
-      <DependentUpon>201805221317577_Migration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201805222149189_Migration1.resx">
+      <DependentUpon>201805222149189_Migration1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

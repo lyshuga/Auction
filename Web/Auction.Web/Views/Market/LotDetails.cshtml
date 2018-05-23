@@ -1,0 +1,114 @@
+﻿@model Auction.Web.Models.DetailsLotModel
+
+@{
+    ViewBag.Title = "LotDetails";
+}
+
+<h2>Lot</h2>
+
+<div>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <img src="@String.Format("data:image/png;base64,{0}", Model.Photo)" />
+        </div>
+        <div class="col-md-6">
+            <h3>@Html.DisplayFor(model => model.Name)</h3>
+            <br />
+            <p>@Html.DisplayFor(model => model.Description)</p>
+            @using (Html.BeginForm("MakeBid", "Market", null, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.HiddenFor(m => m.Id)
+                @Html.DisplayNameFor(model => model.Price)
+                @Html.EditorFor(model => model.Price)
+                <input type="submit" value="Bid" class="btn btn-default" />
+            }
+        </div>
+    </div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GoodType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GoodType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo)
+        </dt>
+
+        <dd>
+            <img src="@String.Format("data:image/png;base64,{0}", Model.Photo)" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BidderId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BidderId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SellerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SellerId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpireDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpireDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastBid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastBid)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

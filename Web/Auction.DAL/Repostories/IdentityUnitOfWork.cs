@@ -17,9 +17,10 @@ namespace Auction.DAL.Repostories
         
         public ApplicationUserManager UserManager { get; }
         public ApplicationRoleManager RoleManager { get; }
-        public IdentityUnitOfWork(string connectionString)
+        public IdentityUnitOfWork(LotMarketContext db)
         {
-            db = new LotMarketContext(connectionString);
+            this.db = db;
+            var hash = db.Database.Connection.GetHashCode();
             UserManager = new ApplicationUserManager(new UserStore<ApplicationUser>(db));
             RoleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(db));
         }
