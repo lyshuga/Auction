@@ -21,8 +21,8 @@ namespace Auction.DAL.Repostories
         {
             this.db = db;
             var hash = db.Database.Connection.GetHashCode();
-            UserManager = new ApplicationUserManager(new UserStore<ApplicationUser>(db));
-            RoleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(db));
+            UserManager = new ApplicationUserManager(new UserStore<User>(db));
+            RoleManager = new ApplicationRoleManager(new RoleStore<Role>(db));
         }
         
         

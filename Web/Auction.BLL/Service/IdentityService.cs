@@ -31,7 +31,7 @@ namespace Auction.BLL.Service
                 }
                 ClaimsIdentity claim = null;
                 
-                ApplicationUser user = await Database.UserManager.FindAsync(userDto.Email, userDto.Password);
+                User user = await Database.UserManager.FindAsync(userDto.Email, userDto.Password);
                 
                 if (user != null)
                     claim = await Database.UserManager.CreateIdentityAsync(user,
@@ -43,15 +43,15 @@ namespace Auction.BLL.Service
 
         public async Task<Result> CreateAsync(UserDTO userDto)
         {
-            ApplicationUser user = await Database.UserManager.FindByEmailAsync(userDto.Email);
+            User user = await Database.UserManager.FindByEmailAsync(userDto.Email);
             if (user == null)
             {
-                user = new ApplicationUser { Email = userDto.Email, UserName = userDto.Email };
+                user = new User { Email = userDto.Email, UserName = userDto.Email };
                 var result = await Database.UserManager.CreateAsync(user, userDto.Password);
                 if (result.Errors.Count() > 0)
                     return new Result(false, result.Errors.FirstOrDefault(), "");
                 await Database.UserManager.AddToRoleAsync(user.Id, userDto.Role);
-                ApplicationProfile clientProfile = new ApplicationProfile { Id = user.Id, Name = userDto.Name, Balance = userDto.Balance, CreditCard = userDto.CreditCard };
+                Profile clientProfile = new Profile { Id = user.Id, Name = userDto.Name, Balance = userDto.Balance, CreditCard = userDto.CreditCard };
                 user.ApplicationProfile = clientProfile;
                 var list = Database.UserManager.Users.ToList();
                 await Database.SaveAsync();
@@ -69,7 +69,7 @@ namespace Auction.BLL.Service
                 var role = await Database.RoleManager.FindByNameAsync(roleName);
                 if (role == null)
                 {
-                    role = new ApplicationRole { Name = roleName };
+                    role = new Role { Name = roleName };
                     await Database.RoleManager.CreateAsync(role);
                 }
             }

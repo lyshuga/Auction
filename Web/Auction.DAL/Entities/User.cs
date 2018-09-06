@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Auction.DAL.Entities
 {
-    public class ApplicationUser : IdentityUser
+    public class User : IdentityUser
     {
-        public virtual ApplicationProfile ApplicationProfile { get;set; }
+        public virtual Profile ApplicationProfile { get;set; }
 
         public Task<ClaimsIdentity> GenerateUserIdentityAsync(ApplicationUserManager manager)
         {

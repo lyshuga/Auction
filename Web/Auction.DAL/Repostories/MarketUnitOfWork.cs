@@ -14,7 +14,7 @@ namespace Auction.DAL.Repostories
     {
         LotMarketContext db;
         IRepository<Lot> lots;
-        IRepository<ApplicationProfile> profiles;
+        IRepository<Profile> profiles;
         public MarketUnitOfWork(LotMarketContext db)
         {
             this.db = db;
@@ -30,7 +30,7 @@ namespace Auction.DAL.Repostories
                 return lots;
             }
         }
-        public IRepository<ApplicationProfile> Profiles
+        public IRepository<Profile> Profiles
         {
             get
             {

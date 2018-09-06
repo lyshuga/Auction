@@ -16,10 +16,10 @@ namespace Auction.BLL.BusinessModels.Profiles
         {
             config = new MapperConfiguration(cfg => {
 
-                cfg.CreateMap<ApplicationProfile, UserDTO>()
+                cfg.CreateMap<DAL.Entities.Profile, UserDTO>()
                 .ForMember("Id", c => c.MapFrom(s => s.Id))
-                .ForMember("Email", c => c.MapFrom(s => s.ApplicationUser.Email))
-                .ForMember("UserName", c => c.MapFrom(s => s.ApplicationUser.UserName))
+                .ForMember("Email", c => c.MapFrom(s => s.User.Email))
+                .ForMember("UserName", c => c.MapFrom(s => s.User.UserName))
                 .ForMember("Name", c => c.MapFrom(s => s.Name))
                 .ForMember("Balance", c => c.MapFrom(s => s.Balance))
                 .ForMember("CreditCard", c => c.MapFrom(s => s.CreditCard));

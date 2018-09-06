@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Auction.DAL.Market.Repostories
 {
-    public class ProfileRepository : IRepository<ApplicationProfile>
+    public class ProfileRepository : IRepository<Profile>
     {
         LotMarketContext db;
         public ProfileRepository(LotMarketContext context)
@@ -18,38 +18,38 @@ namespace Auction.DAL.Market.Repostories
             db = context;
         }
 
-        public void Create(ApplicationProfile item)
+        public void Create(Profile item)
         {
             db.Profiles.Add(item);
         }
 
         public async Task DeleteAsync(int id)
         {
-            ApplicationProfile profile = await db.Profiles.FindAsync(id);
+            Profile profile = await db.Profiles.FindAsync(id);
             if (profile != null)
             {
                 db.Profiles.Remove(profile);
             }
         }
 
-        public IEnumerable<ApplicationProfile> Find(Func<ApplicationProfile, bool> predicate)
+        public IEnumerable<Profile> Find(Func<Profile, bool> predicate)
         {
             var hash = db.Database.Connection.GetHashCode();
-            return db.Profiles.Include(x => x.ApplicationUser).Where(predicate);
+            return db.Profiles.Include(x => x.User).Where(predicate);
         }
 
-        public async Task<ApplicationProfile> Get(int id)
+        public async Task<Profile> Get(int id)
         {
-            ApplicationProfile profile = await db.Profiles.FindAsync(id);
+            Profile profile = await db.Profiles.FindAsync(id);
             return profile;
         }
 
-        public IEnumerable<ApplicationProfile> GetAll()
+        public IEnumerable<Profile> GetAll()
         {
             return db.Profiles;
         }
 
-        public void Update(ApplicationProfile item)
+        public void Update(Profile item)
         {
             db.Entry(item).State = EntityState.Modified;
         }

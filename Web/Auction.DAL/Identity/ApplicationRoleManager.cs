@@ -9,9 +9,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Auction.DAL.Identity
 {
-    public class ApplicationRoleManager : RoleManager<ApplicationRole>
+    public class ApplicationRoleManager : RoleManager<Role>
     {
-        public ApplicationRoleManager(RoleStore<ApplicationRole> store)
+        public ApplicationRoleManager(RoleStore<Role> store)
                     : base(store)
         { }
     }

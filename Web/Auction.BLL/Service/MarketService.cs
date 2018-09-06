@@ -80,7 +80,7 @@ namespace Auction.BLL.Service
             var mapper = UserToUserDTO.CreateMap();
             var varvar = Database.Profiles.GetAll();
             var profiles = Database.Profiles.Find(x => x.Id == userID);
-            return mapper.Map<ApplicationProfile, UserDTO>(profiles.First());
+            return mapper.Map<DAL.Entities.Profile, UserDTO>(profiles.First());
         }
 
         public Task<LotDTO> GetLotAsync(string lotId)

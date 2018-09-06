@@ -16,7 +16,7 @@ namespace Auction.BLL.BusinessModels.Profiles
         {
             config = new MapperConfiguration(cfg => {
 
-                cfg.CreateMap<UserDTO, ApplicationUser>()
+                cfg.CreateMap<UserDTO, User>()
                 .ForMember("Id", c => c.MapFrom(s => s.Id))
                 .ForMember("Email", c => c.MapFrom(s => s.Email))
                 .ForMember("UserName", c => c.MapFrom(s => s.UserName))

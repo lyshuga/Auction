@@ -8,18 +8,19 @@ using System.Threading.Tasks;
 
 namespace Auction.DAL.Entities
 {
-    public class ApplicationProfile
+    public class Profile
     {
-        [ForeignKey("ApplicationUser")]
+        [ForeignKey("User")]
         public string Id { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
         public decimal Balance { get; set; }
         public string CreditCard { get; set; }
-        public ApplicationUser ApplicationUser { get; set; }
-
+        public User User { get; set; }
+        [InverseProperty("Seller")]
         public virtual ICollection<Lot> AuctionedLots { get; set; }
+        [InverseProperty("Bidder")]
         public virtual ICollection<Lot> BiddenLots { get; set; }
     }
 }

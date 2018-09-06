@@ -96,6 +96,7 @@
     <Compile Include="BusinessModels\Profiles\LotToLotDTO.cs" />
     <Compile Include="BusinessModels\Profiles\UserDToToUser.cs" />
     <Compile Include="BusinessModels\Profiles\UserToUserDTO.cs" />
+    <Compile Include="DTO\ProfileDTO.cs" />
     <Compile Include="DTO\LotDTO.cs" />
     <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="BusinessModels\ImageConverter.cs" />

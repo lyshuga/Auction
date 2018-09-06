@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Auction.DAL.Entities
+namespace Auction.BLL.DTO
 {
-    public class Lottt
+    public class ProfileDTO
     {
     }
 }

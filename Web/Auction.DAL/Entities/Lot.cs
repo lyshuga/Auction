@@ -22,13 +22,9 @@ namespace Auction.DAL.Entities
         public string GoodType { get; set; }
         public byte[] Photo { get; set; }
         [Required]
-        public string SellerId { get; set; }
-        [ForeignKey("SellerId")]
-        public ApplicationProfile Seller { get; set; }
+        public Profile Seller { get; set; }
         [Required]
-        public string BidderId { get; set; }
-        [ForeignKey("BidderId")]
-        public ApplicationProfile Bidder { get; set; }
+        public Profile Bidder { get; set; }
         [Required]
         public decimal Price { get; set; }
         [Required]

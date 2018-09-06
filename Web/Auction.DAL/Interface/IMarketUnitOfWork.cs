@@ -9,7 +9,7 @@ namespace Auction.DAL.Interface
 {
     public interface IMarketUnitOfWork:IDisposable
     {
-        IRepository<ApplicationProfile> Profiles { get; }
+        IRepository<Profile> Profiles { get; }
         IRepository<Lot> Lots { get; }
         Task SaveAsync();
     }

@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Auction.DAL.Identity
 {
-    public class ApplicationUserManager:UserManager<ApplicationUser>
+    public class ApplicationUserManager:UserManager<User>
     {
-        public ApplicationUserManager(IUserStore<ApplicationUser> store)
+        public ApplicationUserManager(IUserStore<User> store)
                 : base(store)
         {
         }
