@@ -13,42 +13,67 @@ namespace Auction.BLL.Infrastructure
     {
         public static void Configure(IMapperConfigurationExpression cfg)
         {
-            cfg.CreateMap<LotDTO, Lot>()
-                .ForMember("Id", c => c.MapFrom(s => s.Id))
-                .ForMember("Name", c => c.MapFrom(s => s.Name))
-                .ForMember("Description", c => c.MapFrom(s => s.Description))
-                .ForMember("GoodType", c => c.MapFrom(s => s.GoodType))
-                .ForMember("Photo", c => c.MapFrom(s => s.Photo))
-                .ForMember("Price", c => c.MapFrom(s => s.Price))
-                .ForMember("StartDate", c => c.MapFrom(s => s.StartDate))
-                .ForMember("ExpireDate", c => c.MapFrom(s => s.ExpireDate))
-                .ForMember("LastBid", c => c.MapFrom(s => s.LastBid))
-                .ForMember("BidderId", c => c.MapFrom(s => s.BidderId))
-                .ForMember("SellerId", c => c.MapFrom(s => s.SellerId));
             cfg.CreateMap<Lot, LotDTO>()
                 .ForMember("Id", c => c.MapFrom(s => s.Id))
                 .ForMember("Name", c => c.MapFrom(s => s.Name))
                 .ForMember("Description", c => c.MapFrom(s => s.Description))
                 .ForMember("GoodType", c => c.MapFrom(s => s.GoodType))
                 .ForMember("Photo", c => c.MapFrom(s => s.Photo))
-                .ForMember("Price", c => c.MapFrom(s => s.Price))
+                .ForMember("Seller", c => c.MapFrom(s => s.Seller))
+                .ForMember("StartPrice", c => c.MapFrom(s => s.StartPrice))
                 .ForMember("StartDate", c => c.MapFrom(s => s.StartDate))
                 .ForMember("ExpireDate", c => c.MapFrom(s => s.ExpireDate))
                 .ForMember("LastBid", c => c.MapFrom(s => s.LastBid));
-            cfg.CreateMap<ApplicationUserDTO, ApplicationUser>()
+            cfg.CreateMap<LotDTO, Lot>()
                 .ForMember("Id", c => c.MapFrom(s => s.Id))
-                .ForMember("Email", c => c.MapFrom(s => s.Email))
-                .ForMember("UserName", c => c.MapFrom(s => s.UserName))
+                .ForMember("Name", c => c.MapFrom(s => s.Name))
+                .ForMember("Description", c => c.MapFrom(s => s.Description))
+                .ForMember("GoodType", c => c.MapFrom(s => s.GoodType))
+                .ForMember("Photo", c => c.MapFrom(s => s.Photo))
+                .ForMember("StartPrice", c => c.MapFrom(s => s.StartPrice))
+                .ForMember("StartDate", c => c.MapFrom(s => s.StartDate))
+                .ForMember("ExpireDate", c => c.MapFrom(s => s.ExpireDate))
+                .ForMember("LastBid", c => c.MapFrom(s => s.LastBid))
+                .ForMember("Seller", c => c.MapFrom(s => s.Seller));
+            cfg.CreateMap<Bid, BidDTO>()
+                .ForMember("Id", c => c.MapFrom(s => s.Id))
+                .ForMember("Bidder", c => c.MapFrom(s => s.Bidder))
+                .ForMember("Lot", c => c.MapFrom(s => s.Lot))
+                .ForMember("Time", c => c.MapFrom(s => s.Time))
+                ;
+            cfg.CreateMap<BidDTO, Bid>()
+                .ForMember("Id", c => c.MapFrom(s => s.Id))
+                .ForMember("Bidder", c => c.MapFrom(s => s.Bidder))
+                .ForMember("Lot", c => c.MapFrom(s => s.Lot))
+                .ForMember("Time", c => c.MapFrom(s => s.Time))
+                ;
+            //cfg.CreateMap<ApplicationUser, ApplicationUserDTO>()
+            //    .ForMember("Id", c => c.MapFrom(s => s.Id))
+            //    .ForMember("Email", c => c.MapFrom(s => s.Email))
+            //    .ForMember("Password", c => c.MapFrom(s => s.PasswordHash))
+            //    .ForMember("Role", c => c.MapFrom(s => s.Roles.FirstOrDefault()))
+            //    .ForMember("ApplicationProfile", c => c.MapFrom(s => s.ApplicationProfile))
+            //    ;
+            //cfg.CreateMap<ApplicationUserDTO, ApplicationUser>()
+            //    .ForMember("Id", c => c.MapFrom(s => s.Id))
+            //    .ForMember("Email", c => c.MapFrom(s => s.Email))
+            //    .ForMember("UserName", c => c.MapFrom(s => s.Email))
+            //    .ForMember("Password", c => c.MapFrom(s => s.Password))
+            //    .ForMember("Role", c => c.MapFrom(s => s.Role))
+            //    .ForMember("ApplicationProfile", c => c.MapFrom(s => s.ApplicationProfile))
+            //    ;
+            cfg.CreateMap<ApplicationProfile, ApplicationProfileDTO>()
+                .ForMember("Id", c => c.MapFrom(s => s.Id))
                 .ForMember("Name", c => c.MapFrom(s => s.Name))
                 .ForMember("Balance", c => c.MapFrom(s => s.Balance))
-                .ForMember("CreditCard", c => c.MapFrom(s => s.CreditCard));
-            cfg.CreateMap<DAL.Entities.ApplicationProfile, ApplicationUserDTO>()
+                .ForMember("CreditCard", c => c.MapFrom(s => s.CreditCard))
+                ;
+            cfg.CreateMap<ApplicationProfileDTO, ApplicationProfile>()
                 .ForMember("Id", c => c.MapFrom(s => s.Id))
-                .ForMember("Email", c => c.MapFrom(s => s.User.Email))
-                .ForMember("UserName", c => c.MapFrom(s => s.User.UserName))
                 .ForMember("Name", c => c.MapFrom(s => s.Name))
                 .ForMember("Balance", c => c.MapFrom(s => s.Balance))
-                .ForMember("CreditCard", c => c.MapFrom(s => s.CreditCard));
+                .ForMember("CreditCard", c => c.MapFrom(s => s.CreditCard))
+                ;
         }
     }
 }

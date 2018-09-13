@@ -12,6 +12,5 @@ namespace Auction.BLL.DTO
         public string Name { get; set; }
         public decimal Balance { get; set; }
         public string CreditCard { get; set; }
-        public string Role { get; set; }
     }
 }

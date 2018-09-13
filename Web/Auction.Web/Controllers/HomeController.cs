@@ -44,12 +44,6 @@ namespace Auction.Web.Controllers
 
             return View();
         }
-        public async Task<ActionResult> Create()
-        {
-            ApplicationUserDTO user = new ApplicationUserDTO() { Name = "Kolia", Email = "kolia@gmail.com", Password = "pukpuk", Role = "admin", Balance = 238, CreditCard = "1234567890" };
-            Result result = await IdentityService.CreateAsync(user);
-            return Content(result.Message);
-        }
         //public void CreateLot()
         //{
             
@@ -71,15 +65,5 @@ namespace Auction.Web.Controllers
         //        SellerId = "3e8299fc-ca28-4f6e-9ef9-c572a521be2f"
         //    });
         //}
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                IdentityService?.Dispose();
-                MarketService?.Dispose();
-            }
-
-            base.Dispose(disposing);
-        }
     }
 }

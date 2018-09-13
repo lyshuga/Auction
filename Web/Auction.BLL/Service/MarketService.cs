@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using Auction.BLL.BusinessModels.Profiles;
 using Auction.DAL.Entities;
 using Auction.BLL.Infrastructure;
 
@@ -24,9 +23,8 @@ namespace Auction.BLL.Service
         {
             if (lotDTO != null)
             {
-                var mapper = LotDTOToLot.CreateMap();
 
-                Lot lot = mapper.Map<LotDTO, Lot>(lotDTO);
+                Lot lot = Mapper.Map<LotDTO, Lot>(lotDTO);
                 Database.Lots.Create(lot);
                 Database.SaveAsync();
                 return new Result(true, $"Lot {lotDTO.Name} is created", "");
@@ -40,23 +38,16 @@ namespace Auction.BLL.Service
             if (userDTO == null)
             {
                 var allLots = Database.Lots.GetAll();
-                var mapper = LotToLotDTO.CreateMap();
-                var lotDTOs = mapper.Map<IEnumerable<Lot>, IEnumerable<LotDTO>>(allLots);
+                var lotDTOs = Mapper.Map<IEnumerable<Lot>, IEnumerable<LotDTO>>(allLots);
                 return lotDTOs;
             }
             else
             {
                 var lots = Database.Lots.Find(x => x.Seller.Id == userDTO.Id);
-                var mapper = LotToLotDTO.CreateMap();
-                var lotDTOs = mapper.Map<IEnumerable<Lot>, IEnumerable<LotDTO>>(lots);
+                var lotDTOs = Mapper.Map<IEnumerable<Lot>, IEnumerable<LotDTO>>(lots);
                 return lotDTOs;
             }
             
-        }
-        
-        public void Dispose()
-        {
-            Database?.Dispose();
         }
 
         public Task<Result> DeleteLotAsync(string id)
@@ -66,9 +57,8 @@ namespace Auction.BLL.Service
 
         public async Task<Result> EditLotAsync(LotDTO lotDTO)
         {
-            var mapper = LotToLotDTO.CreateMap();
             var lot = await Database.Lots.Get(lotDTO.Id);
-            lot.Price = lotDTO.Price;
+            lot.StartPrice = lotDTO.StartPrice;
             Database.Lots.Update(lot);
             await Database.SaveAsync();
             return new Result(true, $"", "");
@@ -76,10 +66,9 @@ namespace Auction.BLL.Service
 
         public ApplicationUserDTO GetProfile(string userID)
         {
-            var mapper = UserToUserDTO.CreateMap();
-            var varvar = Database.Profiles.GetAll();
-            var profiles = Database.Profiles.Find(x => x.Id == userID);
-            return mapper.Map<DAL.Entities.ApplicationProfile, ApplicationUserDTO>(profiles.First());
+            var profiles = Database.Profiles.GetAll();
+            var foundProfiles = Database.Profiles.Find(x => x.Id == userID);
+            return Mapper.Map<DAL.Entities.ApplicationProfile, ApplicationUserDTO>(foundProfiles.First());
         }
 
         public Task<LotDTO> GetLotAsync(string lotId)

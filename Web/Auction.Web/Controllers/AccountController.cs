@@ -17,13 +17,8 @@ namespace Auction.Web.Controllers
     [AllowAnonymous]
     public class AccountController : Controller
     {
-        private IAuthenticationManager AuthenticationManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
-        }
+        private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
+
         [Inject]
         private IIdentityService IdentityService { get; set; }
         public AccountController(IIdentityService identity)
@@ -56,7 +51,7 @@ namespace Auction.Web.Controllers
                     {
                         IsPersistent = true
                     }, claim);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Profile", "Market");
                 }
             }
             return View(model);
@@ -74,7 +69,13 @@ namespace Auction.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                ApplicationUserDTO userDto = new ApplicationUserDTO { Email = model.Email, Password = model.Password, Name = model.Name, Role = "user" };
+                ApplicationUserDTO userDto = new ApplicationUserDTO
+                {
+                    Email = model.Email,
+                    Password = model.Password,
+                    Role = "user",
+                    ApplicationProfile = new ApplicationProfileDTO() { Name = model.Name, CreditCard = model.CreditCard}
+                };
                 var result = await IdentityService.CreateAsync(userDto);
                 if (!result.Succedeed)
                 {

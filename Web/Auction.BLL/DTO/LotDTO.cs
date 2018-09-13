@@ -15,7 +15,7 @@ namespace Auction.BLL.DTO
         public string Description { get; set; }
         public string GoodType { get; set; }
         public byte[] Photo { get; set; }
-        public decimal Price { get; set; }
+        public decimal StartPrice { get; set; }
         public ApplicationProfileDTO Seller { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime ExpireDate { get; set; }

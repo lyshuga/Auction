@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Auction.BLL.Interface
 {
-    public interface IMarketService:IDisposable
+    public interface IMarketService
     {
         Result CreateLot(LotDTO lotDTO);
         Task<Result> DeleteLotAsync(string id);

@@ -51,7 +51,7 @@ namespace Auction.BLL.Service
                 if (result.Errors.Count() > 0)
                     return new Result(false, result.Errors.FirstOrDefault(), "");
                 await Database.UserManager.AddToRoleAsync(user.Id, userDto.Role);
-                ApplicationProfile clientProfile = new ApplicationProfile { Id = user.Id, Name = userDto.Name, Balance = userDto.Balance, CreditCard = userDto.CreditCard };
+                ApplicationProfile clientProfile = new ApplicationProfile { Id = user.Id, Name = userDto.ApplicationProfile.Name, Balance = userDto.ApplicationProfile.Balance, CreditCard = userDto.ApplicationProfile.CreditCard };
                 user.ApplicationProfile = clientProfile;
                 var list = Database.UserManager.Users.ToList();
                 await Database.SaveAsync();
@@ -75,12 +75,6 @@ namespace Auction.BLL.Service
             }
             await CreateAsync(adminDto);
         }
-
-        public void Dispose()
-        {
-            Database?.Dispose();
-        }
-
         public Task<Result> DeleteUserAsync(string Id)
         {
             throw new NotImplementedException();

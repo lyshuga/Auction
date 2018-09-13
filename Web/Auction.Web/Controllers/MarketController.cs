@@ -37,7 +37,7 @@ namespace Auction.Web.Controllers
             {
                 if (upload != null && upload.ContentLength > 0 && upload.ContentLength < 999999)
                 {
-                    string id = User.Identity.GetUserId();
+                    string sellerId = User.Identity.GetUserId();
                     byte[] b;
                     using (BinaryReader br = new BinaryReader(upload.InputStream))
                     {
@@ -51,10 +51,8 @@ namespace Auction.Web.Controllers
                         GoodType = model.GoodType,
                         StartDate = model.StartDate,
                         ExpireDate = model.ExpireDate,
-                        Price = model.Price,
-                        LastBid = model.StartDate,
-                        BidderId = id,
-                        SellerId = id
+                        StartPrice = model.Price, 
+                        Seller = new ApplicationProfileDTO() { Id = sellerId}
                     };
                     
                     var result = MarketService.CreateLot(lot);
@@ -76,7 +74,7 @@ namespace Auction.Web.Controllers
         {
             string userId = User.Identity.GetUserId();
             var profile = MarketService.GetProfile(userId);
-            var lot = MarketService.GetLots(profile).Where(x=>x.Id == id).First();
+            var lot = MarketService.GetLots(profile).First(x => x.Id == id);
             DetailsLotModel model = new DetailsLotModel()
             {
                 Id = id,
@@ -86,17 +84,17 @@ namespace Auction.Web.Controllers
                 GoodType = lot.GoodType,
                 StartDate = lot.StartDate,
                 ExpireDate = lot.ExpireDate,
-                Price = lot.Price,
+                Price = lot.StartPrice,
                 LastBid = lot.StartDate,
-                BidderId = lot.BidderId,
-                SellerId = lot.SellerId
+                BidderId = lot.LastBid.Bidder.Name,
+                SellerId = lot.Seller.Name
             };
             return View(model);
         }
         [HttpPost]
         public async Task<ActionResult> MakeBid(DetailsLotModel model)
         {
-            LotDTO lotDTO = new LotDTO() { Id = model.Id, Price = model.Price };
+            LotDTO lotDTO = new LotDTO() { Id = model.Id, StartPrice = model.Price };
             await MarketService.EditLotAsync(lotDTO);
             return RedirectToAction("LotDetails", new { id = model.Id });
         }
