@@ -13,14 +13,14 @@ namespace Auction.DAL.Repostories
     public class MarketUnitOfWork : IMarketUnitOfWork
     {
         MarketContext db;
-        IRepository<Lot> lotRepository;
-        IRepository<ApplicationProfile> profileRepository;
+        IRepository<Lot, int> lotRepository;
+        IRepository<ApplicationProfile, string> profileRepository;
         public MarketUnitOfWork(MarketContext db)
         {
             this.db = db;
         }
-        public IRepository<Lot> Lots => lotRepository ?? (lotRepository = new LotRepository(db));
-        public IRepository<ApplicationProfile> Profiles => profileRepository ?? (profileRepository = new ProfileRepository(db));
+        public IRepository<Lot, int> Lots => lotRepository ?? (lotRepository = new LotRepository(db));
+        public IRepository<ApplicationProfile, string> Profiles => profileRepository ?? (profileRepository = new ProfileRepository(db));
 
         public async Task SaveAsync()
         {

@@ -1,6 +1,7 @@
 ﻿using Auction.DAL.EF;
 using Auction.DAL.Entities;
 using Auction.DAL.Interface;
+using Auction.DAL.Repostories.Service;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,46 +11,19 @@ using System.Threading.Tasks;
 
 namespace Auction.DAL.Market.Repostories
 {
-    public class LotRepository : IRepository<Lot>
+    public class LotRepository : AbstractService<Lot, int>
     {
-        MarketContext db;
-        public LotRepository(MarketContext context)
+        public LotRepository(MarketContext context):base(context){}
+
+        public override IEnumerable<Lot> Find(Func<Lot, bool> predicate)
         {
-            db = context;
-        }
-        public void Create(Lot item)
-        {
-            db.Lots.Add(item);
+            return db.Lots./*Include(x=>x.Seller).Include(x=>x.LastBid).*/Where(predicate).AsEnumerable();
         }
 
-        public async Task DeleteAsync(int id)
+        public override async Task<Lot> Get(int id)
         {
-            Lot lot = await db.Lots.FindAsync(id);
-            if (lot !=null)
-            {
-                db.Lots.Remove(lot);
-            }
-        }
-
-        public IEnumerable<Lot> Find(Func<Lot, bool> predicate)
-        {
-            return db.Lots.Where(predicate);
-        }
-
-        public async Task<Lot> Get(int id)
-        {
-            Lot lot = await db.Lots.FindAsync(id);
+            Lot lot = await db.Lots/*.Include(x => x.Seller).Include(x => x.Bids)*/.FirstAsync(x => x.Id == id);
             return lot;
-        }
-
-        public IEnumerable<Lot> GetAll()
-        {
-            return db.Lots.ToList();
-        }
-
-        public void Update(Lot item)
-        {
-            db.Entry(item).State = EntityState.Modified;
         }
     }
 }

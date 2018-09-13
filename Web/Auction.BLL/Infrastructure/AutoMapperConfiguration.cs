@@ -19,11 +19,11 @@ namespace Auction.BLL.Infrastructure
                 .ForMember("Description", c => c.MapFrom(s => s.Description))
                 .ForMember("GoodType", c => c.MapFrom(s => s.GoodType))
                 .ForMember("Photo", c => c.MapFrom(s => s.Photo))
-                .ForMember("Seller", c => c.MapFrom(s => s.Seller))
+                //.ForMember("Seller", c => c.MapFrom(s => s.Seller))
                 .ForMember("StartPrice", c => c.MapFrom(s => s.StartPrice))
                 .ForMember("StartDate", c => c.MapFrom(s => s.StartDate))
                 .ForMember("ExpireDate", c => c.MapFrom(s => s.ExpireDate))
-                .ForMember("LastBid", c => c.MapFrom(s => s.LastBid));
+                /*.ForMember("Bids", c => c.MapFrom(s => s.Bids))*/;
             cfg.CreateMap<LotDTO, Lot>()
                 .ForMember("Id", c => c.MapFrom(s => s.Id))
                 .ForMember("Name", c => c.MapFrom(s => s.Name))
@@ -33,8 +33,9 @@ namespace Auction.BLL.Infrastructure
                 .ForMember("StartPrice", c => c.MapFrom(s => s.StartPrice))
                 .ForMember("StartDate", c => c.MapFrom(s => s.StartDate))
                 .ForMember("ExpireDate", c => c.MapFrom(s => s.ExpireDate))
-                .ForMember("LastBid", c => c.MapFrom(s => s.LastBid))
-                .ForMember("Seller", c => c.MapFrom(s => s.Seller));
+                //.ForMember("Bids", c => c.MapFrom(s => s.Bids))
+                //.ForMember("Seller", c => c.MapFrom(s => s.Seller))
+                ;
             cfg.CreateMap<Bid, BidDTO>()
                 .ForMember("Id", c => c.MapFrom(s => s.Id))
                 .ForMember("Bidder", c => c.MapFrom(s => s.Bidder))

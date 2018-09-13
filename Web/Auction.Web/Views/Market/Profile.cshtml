@@ -4,7 +4,7 @@
 
 <h2>@ViewBag.Profile.Name</h2>
 
-<table class="table table-bordered table-hover"">
+<table class="table table-bordered table-hover">
     <tr>
         <th>Name</th>
         <th>Description</th>
@@ -18,7 +18,7 @@
         <td>@Html.DisplayFor(model => item.Name)</td>
         <td>@Html.DisplayFor(model => item.Description)</td>
         <td><img src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(item.Photo))" height="200" width="200" class="img-responsive" /></td>
-        <td>@Html.DisplayFor(model => item.Price)</td>
+        <td>@Html.DisplayFor(model => item.StartPrice)</td>
         <td>
             @Html.ActionLink("Details", "LotDetails", new { id = item.Id }, htmlAttributes: new { @class = ".btn-primary" })
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })

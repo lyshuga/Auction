@@ -9,8 +9,8 @@ namespace Auction.DAL.Interface
 {
     public interface IMarketUnitOfWork
     {
-        IRepository<ApplicationProfile> Profiles { get; }
-        IRepository<Lot> Lots { get; }
+        IRepository<ApplicationProfile, string> Profiles { get; }
+        IRepository<Lot, int> Lots { get; }
         Task SaveAsync();
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -11,6 +12,8 @@ namespace Auction.DAL.Entities
 {
     public class ApplicationUser : IdentityUser
     {
-        public virtual ApplicationProfile ApplicationProfile { get;set; }
+        public string ApplicationProfileId { get; set; }
+        [ForeignKey("ApplicationProfileId")]
+        public ApplicationProfile ApplicationProfile { get;set; }
     }
 }

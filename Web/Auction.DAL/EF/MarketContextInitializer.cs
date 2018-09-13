@@ -1,17 +1,14 @@
-﻿using Auction.DAL.Entities;
+﻿using System;
+using Auction.DAL.Entities;
 using Auction.DAL.Identity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Auction.DAL.EF
 {
-    public class MarketContextInitializer: CreateDatabaseIfNotExists<MarketContext>
+    public class MarketContextInitializer: DropCreateDatabaseIfModelChanges<MarketContext>
     {
         protected override void Seed(MarketContext context)
         {
@@ -27,7 +24,18 @@ namespace Auction.DAL.EF
             roleManager.Create(role2);
             roleManager.Create(role3);
 
-            var admin = new ApplicationUser { Email = "admin@gmail.com", UserName = "admin@gmail.com" };
+            ApplicationUser admin;
+            admin = new ApplicationUser
+            {
+                Email = "admin@gmail.com", UserName = "admin@gmail.com",
+                ApplicationProfile = new ApplicationProfile()
+                    {
+                        Name = "Admin",
+                        Balance = 30,
+                        CreditCard = "sdsd"
+                    }
+            };
+            admin.ApplicationProfile.User = admin;
             string password = "adminKiller";
             var result = userManager.Create(admin, password);
             
@@ -36,6 +44,18 @@ namespace Auction.DAL.EF
                 userManager.AddToRole(admin.Id, role1.Name);
                 userManager.AddToRole(admin.Id, role2.Name);
             }
+
+            Lot Lot = new Lot()
+            {
+                Name = "KK",
+                Description = "DSec",
+                GoodType = "DD",
+                StartPrice = 200,
+                StartDate = DateTime.Now,
+                ExpireDate = DateTime.Now,
+                Seller = admin.ApplicationProfile
+            };
+            context.Lots.Add(Lot);
 
             var user = new ApplicationUser { Email = "user@gmail.com", UserName = "user@gmail.com" };
             password = "userBoy";

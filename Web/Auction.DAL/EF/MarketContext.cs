@@ -14,16 +14,17 @@ namespace Auction.DAL.EF
     {
         public DbSet<ApplicationProfile> Profiles { get; set; }
         public DbSet<Lot> Lots { get; set; }
+        public DbSet<Bid> Bids { get; set; }
 
         public MarketContext(string connectionString)
             : base(connectionString, throwIfV1Schema: false)
         {
-            
+            this.Configuration.AutoDetectChangesEnabled = true;
         }
         public MarketContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
-
+            this.Configuration.AutoDetectChangesEnabled = true;
         }
 
         

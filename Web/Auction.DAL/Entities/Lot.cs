@@ -29,6 +29,6 @@ namespace Auction.DAL.Entities
         public DateTime StartDate { get; set; }
         [Required]
         public DateTime ExpireDate { get; set; }
-        public Bid LastBid { get; set; }
+        public ICollection<Bid> Bids { get; set; }
     }
 }

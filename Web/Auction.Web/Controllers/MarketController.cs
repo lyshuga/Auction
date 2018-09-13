@@ -51,10 +51,11 @@ namespace Auction.Web.Controllers
                         GoodType = model.GoodType,
                         StartDate = model.StartDate,
                         ExpireDate = model.ExpireDate,
-                        StartPrice = model.Price, 
-                        Seller = new ApplicationProfileDTO() { Id = sellerId}
+                        StartPrice = model.Price,
+                        Seller = new ApplicationProfileDTO() { Id = sellerId }
                     };
-                    
+
+
                     var result = MarketService.CreateLot(lot);
                     if (!result.Succedeed)
                     {
@@ -85,9 +86,10 @@ namespace Auction.Web.Controllers
                 StartDate = lot.StartDate,
                 ExpireDate = lot.ExpireDate,
                 Price = lot.StartPrice,
-                LastBid = lot.StartDate,
-                BidderId = lot.LastBid.Bidder.Name,
-                SellerId = lot.Seller.Name
+                LastBid = lot.StartDate
+                //,
+                //BidderId = lot.LastBid.Bidder.Name,
+                //SellerId = lot.Seller.Name
             };
             return View(model);
         }

@@ -15,9 +15,11 @@ namespace Auction.DAL.Entities
         public int Id { get; set; }
         [Required]
         public ApplicationProfile Bidder { get; set; }
-        [Required]
-        public Lot Lot { get; set; }
+        
         [Required]
         public DateTime Time { get; set; }
+        [ForeignKey("LotId")]
+        public Lot Lot { get; set; }
+        public int? LotId { get; set; }
     }
 }

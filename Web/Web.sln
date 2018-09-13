@@ -11,6 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auction.Test", "Auction.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auction.Web", "Auction.Web\Auction.Web.csproj", "{1C12D8A7-B728-4D45-BDF4-CCD3CF11CEBF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{71D1C152-CE83-4594-8024-8B5E6D781915}"
+	ProjectSection(SolutionItems) = preProject
+		IndexTEst.sql = IndexTEst.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

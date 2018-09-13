@@ -19,6 +19,6 @@ namespace Auction.BLL.DTO
         public ApplicationProfileDTO Seller { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime ExpireDate { get; set; }
-        public BidDTO LastBid { get; set; }
+        public ICollection<BidDTO> Bids { get; set; }
     }
 }

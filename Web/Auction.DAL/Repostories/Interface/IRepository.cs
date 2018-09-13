@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Auction.DAL.Interface
 {
-    public interface IRepository<T> where T:class
+    public interface IRepository<TEntity, TArg> where TEntity:class
     {
-        IEnumerable<T> GetAll();
-        Task<T> Get(int id);
-        IEnumerable<T> Find(Func<T, Boolean> predicate);
-        void Create(T item);
-        void Update(T item);
-        Task DeleteAsync(int id);
+        IEnumerable<TEntity> GetAll();
+        Task<TEntity> Get(TArg id);
+        IEnumerable<TEntity> Find(Func<TEntity, Boolean> predicate);
+        void Create(TEntity item);
+        void Update(TEntity item);
+        Task DeleteAsync(TArg id);
     }
 }

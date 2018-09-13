@@ -25,6 +25,8 @@ namespace Auction.BLL.Service
             {
 
                 Lot lot = Mapper.Map<LotDTO, Lot>(lotDTO);
+                var profile = Database.Profiles.Find(x => x.Id == lotDTO.Seller.Id).FirstOrDefault();
+                lot.Seller = profile;
                 Database.Lots.Create(lot);
                 Database.SaveAsync();
                 return new Result(true, $"Lot {lotDTO.Name} is created", "");
@@ -33,7 +35,7 @@ namespace Auction.BLL.Service
         }
         
 
-        public IEnumerable<LotDTO> GetLots(ApplicationUserDTO userDTO)
+        public IEnumerable<LotDTO> GetLots(ApplicationProfileDTO userDTO)
         {
             if (userDTO == null)
             {
@@ -43,11 +45,10 @@ namespace Auction.BLL.Service
             }
             else
             {
-                var lots = Database.Lots.Find(x => x.Seller.Id == userDTO.Id);
+                var lots = Database.Lots.Find(x => x.Seller.Id == userDTO.Id).ToList();
                 var lotDTOs = Mapper.Map<IEnumerable<Lot>, IEnumerable<LotDTO>>(lots);
                 return lotDTOs;
             }
-            
         }
 
         public Task<Result> DeleteLotAsync(string id)
@@ -64,11 +65,11 @@ namespace Auction.BLL.Service
             return new Result(true, $"", "");
         }
 
-        public ApplicationUserDTO GetProfile(string userID)
+        public ApplicationProfileDTO GetProfile(string userID)
         {
             var profiles = Database.Profiles.GetAll();
             var foundProfiles = Database.Profiles.Find(x => x.Id == userID);
-            return Mapper.Map<DAL.Entities.ApplicationProfile, ApplicationUserDTO>(foundProfiles.First());
+            return Mapper.Map<ApplicationProfile, ApplicationProfileDTO>(foundProfiles.First());
         }
 
         public Task<LotDTO> GetLotAsync(string lotId)
