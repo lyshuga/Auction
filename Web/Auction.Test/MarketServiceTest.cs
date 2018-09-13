@@ -18,7 +18,7 @@ namespace Auction.Test
         {
             try
             {
-                DAL.EF.LotMarketContext context = new DAL.EF.LotMarketContext("DefaultConnection");
+                DAL.EF.MarketContext context = new DAL.EF.MarketContext("DefaultConnection");
                 context.Lots.Add(new DAL.Entities.Lot()
                 {
                     Name = "kyky",

@@ -22,16 +22,15 @@ namespace Auction.DAL.Entities
         public string GoodType { get; set; }
         public byte[] Photo { get; set; }
         [Required]
-        public Profile Seller { get; set; }
+        public ApplicationProfile Seller { get; set; }
         [Required]
-        public Profile Bidder { get; set; }
+        public ApplicationProfile Bidder { get; set; }
         [Required]
         public decimal Price { get; set; }
         [Required]
         public DateTime StartDate { get; set; }
         [Required]
         public DateTime ExpireDate { get; set; }
-        [Required]
-        public DateTime LastBid { get; set; }
+        public Bid LastBid { get; set; }
     }
 }

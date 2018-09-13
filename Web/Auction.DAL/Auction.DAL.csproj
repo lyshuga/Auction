@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Auction.DAL</RootNamespace>
     <AssemblyName>Auction.DAL</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,10 +38,10 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -53,27 +54,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EF\LotMarketContext.cs" />
-    <Compile Include="EF\LotMarketContextInitializer.cs" />
-    <Compile Include="Entities\Profile.cs" />
-    <Compile Include="Entities\Role.cs" />
-    <Compile Include="Entities\User.cs" />
+    <Compile Include="EF\MarketContext.cs" />
+    <Compile Include="EF\MarketContextInitializer.cs" />
+    <Compile Include="Entities\ApplicationProfile.cs" />
+    <Compile Include="Entities\ApplicationRole.cs" />
+    <Compile Include="Entities\ApplicationUser.cs" />
+    <Compile Include="Entities\Bid.cs" />
     <Compile Include="Entities\Lot.cs" />
     <Compile Include="Identity\ApplicationRoleManager.cs" />
     <Compile Include="Identity\ApplicationUserManager.cs" />
-    <Compile Include="Interface\IMarketUnitOfWork.cs" />
-    <Compile Include="Interface\IRepository.cs" />
-    <Compile Include="Interface\IIdentityUnitOfWork.cs" />
+    <Compile Include="Repostories\Interface\IRepository.cs" />
     <Compile Include="Migrations\201805222149189_Migration1.cs" />
     <Compile Include="Migrations\201805222149189_Migration1.Designer.cs">
       <DependentUpon>201805222149189_Migration1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repostories\IdentityUnitOfWork.cs" />
-    <Compile Include="Repostories\Market\LotRepository.cs" />
-    <Compile Include="Repostories\MarketUnitOfWork.cs" />
-    <Compile Include="Repostories\Market\ProfileRepository.cs" />
+    <Compile Include="UnitOfWork\Service\IdentityUnitOfWork.cs" />
+    <Compile Include="Repostories\Service\LotRepository.cs" />
+    <Compile Include="UnitOfWork\Interface\IIdentityUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\Interface\IMarketUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\Service\MarketUnitOfWork.cs" />
+    <Compile Include="Repostories\Service\ProfileRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

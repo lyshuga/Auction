@@ -15,14 +15,14 @@ namespace Auction.BLL.Infrastructure
 {
     public class ServiceModule : NinjectModule
     {
-        private string connectionString;
+        private readonly string connectionString;
         public ServiceModule(string connection)
         {
             connectionString = connection;
         }
         public override void Load()
         {
-            Bind<LotMarketContext>().To<LotMarketContext>().InRequestScope().WithConstructorArgument(connectionString);
+            Bind<MarketContext>().To<MarketContext>().InRequestScope().WithConstructorArgument(connectionString);
             Bind<IIdentityUnitOfWork>().To<IdentityUnitOfWork>().InRequestScope();
             Bind<IMarketUnitOfWork>().To<MarketUnitOfWork>().InRequestScope();
         }

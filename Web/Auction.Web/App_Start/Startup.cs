@@ -13,7 +13,6 @@ namespace Auction.Web.App_Start
     {
         public void Configuration(IAppBuilder app)
         {
-            // Дополнительные сведения о настройке приложения см. на странице https://go.microsoft.com/fwlink/?LinkID=316888
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,

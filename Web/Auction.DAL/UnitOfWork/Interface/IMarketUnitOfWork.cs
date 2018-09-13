@@ -1,0 +1,16 @@
+﻿using Auction.DAL.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Auction.DAL.Interface
+{
+    public interface IMarketUnitOfWork
+    {
+        IRepository<ApplicationProfile> Profiles { get; }
+        IRepository<Lot> Lots { get; }
+        Task SaveAsync();
+    }
+}

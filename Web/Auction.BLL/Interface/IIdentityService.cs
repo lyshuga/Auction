@@ -11,10 +11,10 @@ namespace Auction.BLL.Interface
 {
     public interface IIdentityService:IDisposable
     {
-        Task<Result> CreateAsync(UserDTO userDto);
-        Task<ClaimsIdentity> Authenticate(UserDTO userDto);
+        Task<Result> CreateAsync(ApplicationUserDTO userDto);
+        Task<ClaimsIdentity> Authenticate(ApplicationUserDTO userDto);
         Task<Result> DeleteUserAsync(string Id);
-        Task<Result> EditUserAsync(UserDTO userDto);
-        Task SetInitialData(UserDTO adminDto, List<string> roles);
+        Task<Result> EditUserAsync(ApplicationUserDTO userDto);
+        Task SetInitialData(ApplicationUserDTO adminDto, List<string> roles);
     }
 }

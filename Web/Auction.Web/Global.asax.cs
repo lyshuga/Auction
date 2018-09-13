@@ -11,6 +11,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Auction.Web.Util;
+using AutoMapper;
 
 namespace Auction.Web
 {
@@ -18,12 +19,14 @@ namespace Auction.Web
     {
         protected void Application_Start()
         {
-            Database.SetInitializer<LotMarketContext>(new LotMarketContextInitializer());
+            Database.SetInitializer<MarketContext>(new MarketContextInitializer());
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
+            Mapper.Initialize(cfg =>
+                AutoMapperConfiguration.Configure(cfg)
+            );
             ServiceModule service = new ServiceModule("DefaultConnection");
             ControllerModule controller = new ControllerModule();
             var kernel = new StandardKernel(service, controller);

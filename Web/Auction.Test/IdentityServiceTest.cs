@@ -16,8 +16,8 @@ namespace Auction.Test
         [Test]
         public async Task Create_ShouldBeNoExcpetionsAsync()
         {
-            IdentityService service = new IdentityService(new IdentityUnitOfWork(new DAL.EF.LotMarketContext("DefaultConnection")));
-            UserDTO user = new UserDTO() { Name = "Kolia", Email = "kolia@gmail.com", Password = "pukpuk", Role = "admin", Balance = 234, CreditCard = "1234567890" };
+            IdentityService service = new IdentityService(new IdentityUnitOfWork(new DAL.EF.MarketContext("DefaultConnection")));
+            ApplicationUserDTO user = new ApplicationUserDTO() { Name = "Kolia", Email = "kolia@gmail.com", Password = "pukpuk", Role = "admin", Balance = 234, CreditCard = "1234567890" };
             
             try
             {

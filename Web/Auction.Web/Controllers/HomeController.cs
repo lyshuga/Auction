@@ -46,7 +46,7 @@ namespace Auction.Web.Controllers
         }
         public async Task<ActionResult> Create()
         {
-            UserDTO user = new UserDTO() { Name = "Kolia", Email = "kolia@gmail.com", Password = "pukpuk", Role = "admin", Balance = 238, CreditCard = "1234567890" };
+            ApplicationUserDTO user = new ApplicationUserDTO() { Name = "Kolia", Email = "kolia@gmail.com", Password = "pukpuk", Role = "admin", Balance = 238, CreditCard = "1234567890" };
             Result result = await IdentityService.CreateAsync(user);
             return Content(result.Message);
         }
