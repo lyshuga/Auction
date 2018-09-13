@@ -24,9 +24,7 @@ namespace Auction.DAL.Entities
         [Required]
         public ApplicationProfile Seller { get; set; }
         [Required]
-        public ApplicationProfile Bidder { get; set; }
-        [Required]
-        public decimal Price { get; set; }
+        public decimal StartPrice { get; set; }
         [Required]
         public DateTime StartDate { get; set; }
         [Required]

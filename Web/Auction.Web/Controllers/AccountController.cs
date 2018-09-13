@@ -43,7 +43,7 @@ namespace Auction.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                UserDTO userDto = new UserDTO { Email = model.Email, Password = model.Password };
+                ApplicationUserDTO userDto = new ApplicationUserDTO { Email = model.Email, Password = model.Password };
                 ClaimsIdentity claim = await IdentityService.Authenticate(userDto);
                 if (claim == null)
                 {
@@ -74,7 +74,7 @@ namespace Auction.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                UserDTO userDto = new UserDTO { Email = model.Email, Password = model.Password, Name = model.Name, UserName = model.Email, Role = "user" };
+                ApplicationUserDTO userDto = new ApplicationUserDTO { Email = model.Email, Password = model.Password, Name = model.Name, Role = "user" };
                 var result = await IdentityService.CreateAsync(userDto);
                 if (!result.Succedeed)
                 {

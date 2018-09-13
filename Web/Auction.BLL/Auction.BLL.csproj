@@ -99,9 +99,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTO\ProfileDTO.cs" />
+    <Compile Include="DTO\BidDTO.cs" />
+    <Compile Include="DTO\ApplicationProfileDTO.cs" />
     <Compile Include="DTO\LotDTO.cs" />
-    <Compile Include="DTO\UserDTO.cs" />
+    <Compile Include="DTO\ApplicationUserDTO.cs" />
     <Compile Include="Infrastructure\ImageConverter.cs" />
     <Compile Include="Infrastructure\AutoMapperConfiguration.cs" />
     <Compile Include="Infrastructure\Exceptions\ValidateException.cs" />

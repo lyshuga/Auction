@@ -35,7 +35,7 @@ namespace Auction.BLL.Service
         }
         
 
-        public IEnumerable<LotDTO> GetLots(UserDTO userDTO)
+        public IEnumerable<LotDTO> GetLots(ApplicationUserDTO userDTO)
         {
             if (userDTO == null)
             {
@@ -74,12 +74,12 @@ namespace Auction.BLL.Service
             return new Result(true, $"", "");
         }
 
-        public UserDTO GetProfile(string userID)
+        public ApplicationUserDTO GetProfile(string userID)
         {
             var mapper = UserToUserDTO.CreateMap();
             var varvar = Database.Profiles.GetAll();
             var profiles = Database.Profiles.Find(x => x.Id == userID);
-            return mapper.Map<DAL.Entities.ApplicationProfile, UserDTO>(profiles.First());
+            return mapper.Map<DAL.Entities.ApplicationProfile, ApplicationUserDTO>(profiles.First());
         }
 
         public Task<LotDTO> GetLotAsync(string lotId)

@@ -21,7 +21,7 @@ namespace Auction.BLL.Service
         {
             Database = iuw;
         }
-        public async Task<ClaimsIdentity> Authenticate(UserDTO userDto)
+        public async Task<ClaimsIdentity> Authenticate(ApplicationUserDTO userDto)
         {
             if (userDto != null)
             {
@@ -41,7 +41,7 @@ namespace Auction.BLL.Service
             throw new ArgumentNullException("UserDTO is null");
         }
 
-        public async Task<Result> CreateAsync(UserDTO userDto)
+        public async Task<Result> CreateAsync(ApplicationUserDTO userDto)
         {
             ApplicationUser user = await Database.UserManager.FindByEmailAsync(userDto.Email);
             if (user == null)
@@ -62,7 +62,7 @@ namespace Auction.BLL.Service
                 return new Result(false, $"The user with {userDto.Email} is already registered", "Email");
             }
         }
-        public async Task SetInitialData(UserDTO adminDto, List<string> roles)
+        public async Task SetInitialData(ApplicationUserDTO adminDto, List<string> roles)
         {
             foreach (string roleName in roles)
             {
@@ -86,7 +86,7 @@ namespace Auction.BLL.Service
             throw new NotImplementedException();
         }
 
-        public Task<Result> EditUserAsync(UserDTO userDto)
+        public Task<Result> EditUserAsync(ApplicationUserDTO userDto)
         {
             throw new NotImplementedException();
         }

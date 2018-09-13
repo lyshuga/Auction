@@ -17,6 +17,7 @@ namespace Auction.DAL.Entities
         public ApplicationProfile Bidder { get; set; }
         [Required]
         public Lot Lot { get; set; }
+        [Required]
         public DateTime Time { get; set; }
     }
 }
