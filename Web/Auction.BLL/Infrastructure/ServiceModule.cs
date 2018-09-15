@@ -8,6 +8,7 @@ using Auction.BLL.Service;
 using Auction.DAL.EF;
 using Auction.DAL.Interface;
 using Auction.DAL.Repostories;
+using Auction.DAL.UnitOfWork.Service;
 using Ninject.Modules;
 using Ninject.Web.Common;
 

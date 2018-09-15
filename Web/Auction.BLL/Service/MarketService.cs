@@ -19,16 +19,15 @@ namespace Auction.BLL.Service
         {
             Database = iuw;
         }
-        public Result CreateLot(LotDTO lotDTO)
+        public async Task<Result> CreateLot(LotDTO lotDTO)
         {
             if (lotDTO != null)
             {
-
                 Lot lot = Mapper.Map<LotDTO, Lot>(lotDTO);
-                var profile = Database.Profiles.Find(x => x.Id == lotDTO.Seller.Id).FirstOrDefault();
+                var profile = await Database.Profiles.Get(lotDTO.Seller.Id);
                 lot.Seller = profile;
                 Database.Lots.Create(lot);
-                Database.SaveAsync();
+                await Database.SaveAsync();
                 return new Result(true, $"Lot {lotDTO.Name} is created", "");
             }
             throw new ArgumentNullException("lotDTO is null");
@@ -65,16 +64,29 @@ namespace Auction.BLL.Service
             return new Result(true, $"", "");
         }
 
-        public ApplicationProfileDTO GetProfile(string userID)
+        public async Task<ApplicationProfileDTO> GetProfile(string userID)
         {
             var profiles = Database.Profiles.GetAll();
-            var foundProfiles = Database.Profiles.Find(x => x.Id == userID);
-            return Mapper.Map<ApplicationProfile, ApplicationProfileDTO>(foundProfiles.First());
+            var foundProfile = await Database.Profiles.Get(userID);
+            return Mapper.Map<ApplicationProfile, ApplicationProfileDTO>(foundProfile);
         }
 
-        public Task<LotDTO> GetLotAsync(string lotId)
+        public async Task<LotDTO> GetLotAsync(int lotId)
         {
-            throw new NotImplementedException();
+            var lot = await Database.Lots.Get(lotId);
+            var lotDTO = Mapper.Map<Lot, LotDTO>(lot);
+            return lotDTO;
+        }
+
+        public async Task MakeBidAsync(BidDTO bidDTO)
+        {
+            var bidder = await Database.Profiles.Get(bidDTO.Bidder.Id);
+            var lot = await Database.Lots.Get(bidDTO.Lot.Id);
+            var bid = Mapper.Map<BidDTO, Bid>(bidDTO);
+            bid.Lot = lot;
+            bid.Bidder = bidder;
+            Database.Bids.Create(bid);
+            await Database.SaveAsync();
         }
     }
 }

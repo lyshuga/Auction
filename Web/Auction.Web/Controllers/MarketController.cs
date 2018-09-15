@@ -1,17 +1,14 @@
-﻿using Auction.BLL.Interface;
+﻿using Auction.BLL.DTO;
+using Auction.BLL.Interface;
 using Auction.Web.Models;
+using Microsoft.AspNet.Identity;
 using Ninject;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using System.Threading.Tasks;
-using System.IO;
-using Auction.BLL.DTO;
-using System.Net;
 
 namespace Auction.Web.Controllers
 {
@@ -31,7 +28,7 @@ namespace Auction.Web.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateLot(CreateLotModel model, HttpPostedFileBase upload)
+        public async Task<ActionResult> CreateLot(CreateLotModel model, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
@@ -56,7 +53,7 @@ namespace Auction.Web.Controllers
                     };
 
 
-                    var result = MarketService.CreateLot(lot);
+                    var result = await MarketService.CreateLot(lot);
                     if (!result.Succedeed)
                     {
                         ModelState.AddModelError("", result.Message);
@@ -71,11 +68,10 @@ namespace Auction.Web.Controllers
             return View(model);
         }
         
-        public ActionResult LotDetails(int id)
+        public async Task<ActionResult> LotDetails(int id)
         {
-            string userId = User.Identity.GetUserId();
-            var profile = MarketService.GetProfile(userId);
-            var lot = MarketService.GetLots(profile).First(x => x.Id == id);
+            var lot = await MarketService.GetLotAsync(id);
+            var lastBid = lot.Bids.LastOrDefault();
             DetailsLotModel model = new DetailsLotModel()
             {
                 Id = id,
@@ -85,19 +81,23 @@ namespace Auction.Web.Controllers
                 GoodType = lot.GoodType,
                 StartDate = lot.StartDate,
                 ExpireDate = lot.ExpireDate,
-                Price = lot.StartPrice,
-                LastBid = lot.StartDate
-                //,
-                //BidderId = lot.LastBid.Bidder.Name,
-                //SellerId = lot.Seller.Name
+                Price = lastBid?.Price ?? lot.StartPrice,
+                LastBid = lot.Bids.LastOrDefault(),
+                SellerName =  lot.Seller.Name
             };
             return View(model);
         }
         [HttpPost]
         public async Task<ActionResult> MakeBid(DetailsLotModel model)
         {
-            LotDTO lotDTO = new LotDTO() { Id = model.Id, StartPrice = model.Price };
-            await MarketService.EditLotAsync(lotDTO);
+            BidDTO bid = new BidDTO()
+            {
+                Bidder = new ApplicationProfileDTO() {Id = User.Identity.GetUserId()},
+                Lot = new LotDTO() {Id = model.Id},
+                Time = DateTime.Now,
+                Price = model.Price
+            };
+            await MarketService.MakeBidAsync(bid);
             return RedirectToAction("LotDetails", new { id = model.Id });
         }
         //[HttpGet]
@@ -126,10 +126,10 @@ namespace Auction.Web.Controllers
         //    db.SaveChanges();
         //    return RedirectToAction("Index");
         //}
-        public new ActionResult Profile()
+        public new async Task<ActionResult> Profile()
         {
             string userId = User.Identity.GetUserId();
-            var profile = MarketService.GetProfile(userId);
+            var profile = await MarketService.GetProfile(userId);
             ViewBag.Lots = MarketService.GetLots(profile);
             ViewBag.Profile = profile;
             return View();

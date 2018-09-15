@@ -10,10 +10,10 @@ using Auction.DAL.Entities;
 
 namespace Auction.DAL.Repostories.Service
 {
-    public abstract class AbstractService<TEntity, TArg> : IRepository<TEntity, TArg> where TEntity: class
+    public abstract class AbstractRepository<TEntity, TArg> : IRepository<TEntity, TArg> where TEntity: class
     {
         protected MarketContext db;
-        public AbstractService(MarketContext context)
+        public AbstractRepository(MarketContext context)
         {
             db = context;
         }

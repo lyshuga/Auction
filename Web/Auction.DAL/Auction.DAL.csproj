@@ -65,7 +65,8 @@
     <Compile Include="Identity\ApplicationUserManager.cs" />
     <Compile Include="Repostories\Interface\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repostories\Service\AbstractService.cs" />
+    <Compile Include="Repostories\Service\AbstractRepository.cs" />
+    <Compile Include="Repostories\Service\BidRepository.cs" />
     <Compile Include="UnitOfWork\Service\IdentityUnitOfWork.cs" />
     <Compile Include="Repostories\Service\LotRepository.cs" />
     <Compile Include="UnitOfWork\Interface\IIdentityUnitOfWork.cs" />

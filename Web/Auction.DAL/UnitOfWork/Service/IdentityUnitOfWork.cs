@@ -1,15 +1,11 @@
-﻿using Auction.DAL.EF;
+﻿using System.Threading.Tasks;
+using Auction.DAL.EF;
 using Auction.DAL.Entities;
 using Auction.DAL.Identity;
 using Auction.DAL.Interface;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Auction.DAL.Repostories
+namespace Auction.DAL.UnitOfWork.Service
 {
     public class IdentityUnitOfWork : IIdentityUnitOfWork
     {

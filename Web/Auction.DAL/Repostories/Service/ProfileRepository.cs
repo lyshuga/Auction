@@ -11,7 +11,7 @@ using Auction.DAL.Repostories.Service;
 
 namespace Auction.DAL.Market.Repostories
 {
-    public class ProfileRepository : AbstractService<ApplicationProfile, string>
+    public class ProfileRepository : AbstractRepository<ApplicationProfile, string>
     {
         public ProfileRepository(MarketContext context) : base(context) { }
 

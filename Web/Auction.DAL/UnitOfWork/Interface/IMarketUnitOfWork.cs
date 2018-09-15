@@ -11,6 +11,7 @@ namespace Auction.DAL.Interface
     {
         IRepository<ApplicationProfile, string> Profiles { get; }
         IRepository<Lot, int> Lots { get; }
+        IRepository<Bid, int> Bids { get; }
         Task SaveAsync();
     }
 }

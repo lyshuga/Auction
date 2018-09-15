@@ -38,12 +38,14 @@ namespace Auction.BLL.Infrastructure
                 ;
             cfg.CreateMap<Bid, BidDTO>()
                 .ForMember("Id", c => c.MapFrom(s => s.Id))
+                .ForMember("Price", c => c.MapFrom(s => s.Price))
                 .ForMember("Bidder", c => c.MapFrom(s => s.Bidder))
                 .ForMember("Lot", c => c.MapFrom(s => s.Lot))
                 .ForMember("Time", c => c.MapFrom(s => s.Time))
                 ;
             cfg.CreateMap<BidDTO, Bid>()
                 .ForMember("Id", c => c.MapFrom(s => s.Id))
+                .ForMember("Price", c => c.MapFrom(s => s.Price))
                 .ForMember("Bidder", c => c.MapFrom(s => s.Bidder))
                 .ForMember("Lot", c => c.MapFrom(s => s.Lot))
                 .ForMember("Time", c => c.MapFrom(s => s.Time))

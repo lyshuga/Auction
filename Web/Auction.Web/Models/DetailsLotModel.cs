@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Auction.BLL.DTO;
 
 namespace Auction.Web.Models
 {
@@ -16,10 +17,10 @@ namespace Auction.Web.Models
         public string GoodType { get; set; }
         public string Photo { get; set; }
         public decimal Price { get; set; }
-        public string BidderId { get; set; }
-        public string SellerId { get; set; }
+        public string BidderName { get; set; }
+        public string SellerName { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime ExpireDate { get; set; }
-        public DateTime LastBid { get; set; }
+        public BidDTO LastBid { get; set; }
     }
 }

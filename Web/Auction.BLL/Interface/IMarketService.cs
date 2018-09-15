@@ -10,12 +10,13 @@ namespace Auction.BLL.Interface
 {
     public interface IMarketService
     {
-        Result CreateLot(LotDTO lotDTO);
+        Task<Result> CreateLot(LotDTO lotDTO);
         Task<Result> DeleteLotAsync(string id);
         Task<Result> EditLotAsync(LotDTO lotDTO);
 
-        ApplicationProfileDTO GetProfile(string userID);
+        Task<ApplicationProfileDTO> GetProfile(string userID);
         IEnumerable<LotDTO> GetLots(ApplicationProfileDTO userDTO);
-        Task<LotDTO> GetLotAsync(string lotId);
+        Task<LotDTO> GetLotAsync(int lotId);
+        Task MakeBidAsync(BidDTO bidDTO);
     }
 }
