@@ -19,14 +19,30 @@ namespace Auction.DAL.EF
         public MarketContext(string connectionString)
             : base(connectionString, throwIfV1Schema: false)
         {
-            this.Configuration.AutoDetectChangesEnabled = true;
+            Database.SetInitializer<MarketContext>(new MarketContextInitializer());
         }
         public MarketContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
-            this.Configuration.AutoDetectChangesEnabled = true;
+            Database.SetInitializer<MarketContext>(new MarketContextInitializer());
         }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            //modelBuilder.Entity<Lot>()
+            //    .HasMany<Bid>(b=>b.Bids)
+            //    .WithOptional(b=>b.Lot)
+            //    .WillCascadeOnDelete(true);
+            modelBuilder.Entity<Bid>().
+                HasRequired(x=>x.Bidder).
+                WithMany(x=>x.BiddenItems).
+                WillCascadeOnDelete(false);
+            modelBuilder.Entity<Lot>().
+                HasRequired(x => x.Seller).
+                WithMany(x => x.AuctionedLots).
+                WillCascadeOnDelete(false);
+            base.OnModelCreating(modelBuilder);
+        }
         
         
     }

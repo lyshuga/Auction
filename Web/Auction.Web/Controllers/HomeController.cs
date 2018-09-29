@@ -1,17 +1,6 @@
-﻿using Auction.BLL.DTO;
-using Auction.BLL.Infrastructure;
-using Auction.BLL.Interface;
-using Auction.BLL.Service;
-using Auction.DAL.Repostories;
+﻿using Auction.BLL.Interface;
 using Ninject;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using System.Drawing;
 
 namespace Auction.Web.Controllers
 {

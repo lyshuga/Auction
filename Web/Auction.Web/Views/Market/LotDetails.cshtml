@@ -3,7 +3,55 @@
 @{
     ViewBag.Title = "LotDetails";
 }
+<script>
+    var intervalOfUpdate = 1000;
+    var isInputFocused = false;
+    setInterval(getLotPrice, intervalOfUpdate);
+    
+    function makeBid() {
+        isInputFocused = true;
+        var form = document.getElementById("makeBidForm");
+        var requestBody = objectifyForm(form);
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 201) {
+                document.getElementById("requestInfo").innerHTML =
+                    this.responseText;
+            }
+        };
+        xhttp.open("POST", "http://localhost:57840/Market/MakeBid", true);
+        xhttp.setRequestHeader('Content-Type', 'application/json');
+        xhttp.send(requestBody);
+        isInputFocused = false;
+        //getLotPrice();
+    }
 
+    function objectifyForm(formArray) {//serialize data function
+
+        var formString = "{";
+        for (var i = 0; i < formArray.length - 1; i++) {
+            inputString = "\"" + [formArray[i]['name']] + "\":\"" + formArray[i]['value'] + "\",";
+            formString = formString + inputString;
+        }
+        inputString += "\"" + [formArray[formArray.length - 1]['name']] + "\":\"" + formArray[formArray.length - 1]['value'] + "\"";
+        formString = formString + inputString;
+        return formString + "}";
+    }
+    function getLotPrice() {
+        if (true !== isInputFocused) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var jsonObj = JSON.parse(this.responseText);
+                    document.getElementById("Price").value =
+                        jsonObj.Price;
+                }
+            };
+            xhttp.open("GET", "http://localhost:57840/Market/GetPrice/" + @Model.Id, true);
+            xhttp.send();
+        }
+    }
+</script>
 <h2>Lot</h2>
 
 <div>
@@ -16,13 +64,23 @@
             <h3>@Html.DisplayFor(model => model.Name)</h3>
             <br />
             <p>@Html.DisplayFor(model => model.Description)</p>
-            @using (Html.BeginForm("MakeBid", "Market", null, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+
+            @using (Html.BeginForm("MakeBid", "Market", null, FormMethod.Post, new { @id = "makeBidForm", @class = "form-horizontal", role = "form" }))
             {
-                @Html.HiddenFor(m => m.Id)
+                @Html.Hidden("LotId", Model.Id)
+                @Html.Hidden("BidderId", Model.BidderId)
+
                 @Html.DisplayNameFor(model => model.Price)
-                @Html.EditorFor(model => model.Price)
-                <input type="submit" value="Bid" class="btn btn-default" />
+                @Html.EditorFor(model => model.Price, new { @name = "Price" })
+
             }
+            <script>
+                document.getElementById('Price').onfocus = () => isInputFocused = true;
+                document.getElementById('Price').onblur = () => isInputFocused = false;
+            </script>
+            <input type="submit" onclick="makeBid()" value="Bid" class="btn btn-default" />
+            <div id="requestInfo"></div>
+            <input type="submit" onclick="getLotPrice()" value="Get Actual Price" class="btn btn-default" />
         </div>
     </div>
     <dl class="dl-horizontal">

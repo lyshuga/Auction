@@ -18,6 +18,7 @@ namespace Auction.Web.Models
         public string Photo { get; set; }
         public decimal Price { get; set; }
         public string BidderName { get; set; }
+        public string BidderId { get; set; }
         public string SellerName { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime ExpireDate { get; set; }

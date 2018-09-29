@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Auction.DAL.Entities;
 using Auction.BLL.Infrastructure;
+using BidDTO = Auction.BLL.DTO.BidDTO;
 
 namespace Auction.BLL.Service
 {
@@ -50,9 +51,10 @@ namespace Auction.BLL.Service
             }
         }
 
-        public Task<Result> DeleteLotAsync(string id)
+        public async Task DeleteLotAsync(int id)
         {
-            throw new NotImplementedException();
+            await Database.Lots.DeleteAsync(id);
+            await Database.SaveAsync();
         }
 
         public async Task<Result> EditLotAsync(LotDTO lotDTO)
@@ -87,6 +89,12 @@ namespace Auction.BLL.Service
             bid.Bidder = bidder;
             Database.Bids.Create(bid);
             await Database.SaveAsync();
+        }
+        public BidDTO FindBid(int lotId)
+        {
+            var bid = Database.Bids.Find(x => x.Lot.Id == lotId).LastOrDefault();
+            var bidDTO = Mapper.Map<Bid, BidDTO>(bid);
+            return bidDTO;
         }
     }
 }

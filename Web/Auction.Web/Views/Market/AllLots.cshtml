@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Auction.BLL.DTO.LotDTO>
+
+@{
+    ViewBag.Title = "AllLots";
+}
+
+<h2>AllLots</h2>
+
+<div>
+    <h4>DetailsLotModel</h4>
+    <hr />
+    @foreach (Auction.BLL.DTO.LotDTO lot in Model)
+    {
+        <dl class="dl-horizontal">
+            <dd>
+                @Html.DisplayFor(lotItem => lot.Name)
+            </dd>
+
+            <dd>
+                @Html.DisplayFor(model => lot.Description)
+            </dd>
+
+            <dt>
+                <img src="@String.Format("data:image/png;base64,{0}", lot.Photo)" />
+            </dt>
+
+            <dt>
+                @Html.DisplayFor(model => lot.Bids.LastOrDefault().Price)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => lot.Bids.LastOrDefault().Bidder.Name)
+            </dd>
+            <dt>
+                @Html.DisplayFor(model => lot.Seller.Name)
+            </dt>
+        
+            <dd>
+                @Html.DisplayFor(model => lot.StartDate)
+            </dd>
+
+            <dd>
+                @Html.DisplayFor(model => lot.ExpireDate)
+            </dd>
+
+        </dl>
+    }
+    
+</div>

@@ -6,13 +6,15 @@ using Ninject;
 using System;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Owin.Security.Provider;
 
 namespace Auction.Web.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class MarketController : Controller
     {
         [Inject]
@@ -72,6 +74,7 @@ namespace Auction.Web.Controllers
         {
             var lot = await MarketService.GetLotAsync(id);
             var lastBid = lot.Bids.LastOrDefault();
+            var bidderId = User.Identity.GetUserId();
             DetailsLotModel model = new DetailsLotModel()
             {
                 Id = id,
@@ -83,49 +86,69 @@ namespace Auction.Web.Controllers
                 ExpireDate = lot.ExpireDate,
                 Price = lastBid?.Price ?? lot.StartPrice,
                 LastBid = lot.Bids.LastOrDefault(),
-                SellerName =  lot.Seller.Name
+                SellerName =  lot.Seller.Name,
+                BidderName = lastBid?.Bidder.Name,
+                BidderId = bidderId
             };
             return View(model);
         }
+        [HttpGet]
+        public ActionResult GetPrice(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                var bid = MarketService.FindBid(id.Value);
+                var bidResponse = new BidRequestModel()
+                {
+                    BidderId = bid.Bidder.Id,
+                    Price = bid.Price
+                };
+                return Json(bidResponse, JsonRequestBehavior.AllowGet);
+            }
+        }
         [HttpPost]
-        public async Task<ActionResult> MakeBid(DetailsLotModel model)
+        public async Task<HttpStatusCode> MakeBid(BidRequestModel model)
         {
             BidDTO bid = new BidDTO()
             {
-                Bidder = new ApplicationProfileDTO() {Id = User.Identity.GetUserId()},
-                Lot = new LotDTO() {Id = model.Id},
+                Bidder = new ApplicationProfileDTO() {Id = model.BidderId},
+                Lot = new LotDTO() {Id = model.LotId},
                 Time = DateTime.Now,
                 Price = model.Price
             };
             await MarketService.MakeBidAsync(bid);
-            return RedirectToAction("LotDetails", new { id = model.Id });
+            return HttpStatusCode.OK;
         }
-        //[HttpGet]
-        //public ActionResult Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    LotDTO lots = MarketService.GetLots(null).First();
-        //    if (lots == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    MarketService.DeleteLotAsync
-        //    return RedirectToAction("Profile");
-        //}
+        [HttpGet]
+        public async Task<ActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return await new Task<ActionResult>(() => new HttpStatusCodeResult(HttpStatusCode.BadRequest)); 
+            }
+            LotDTO lots = MarketService.GetLots(null).First();
+            if (lots == null)
+            {
+                return await new Task<ActionResult>(() => new HttpStatusCodeResult(HttpStatusCode.NotFound));
+            }
+
+            await MarketService.DeleteLotAsync(id.Value);
+            return RedirectToAction("Profile");
+        }
 
 
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //    Suppliers suppliers = db.Suppliers.Find(id);
-        //    db.Suppliers.Remove(suppliers);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            MarketService.DeleteLotAsync(id);
+            return RedirectToAction("Index", "Home");
+        }
+
         public new async Task<ActionResult> Profile()
         {
             string userId = User.Identity.GetUserId();
@@ -133,6 +156,11 @@ namespace Auction.Web.Controllers
             ViewBag.Lots = MarketService.GetLots(profile);
             ViewBag.Profile = profile;
             return View();
+        }
+        public ActionResult AllLots()
+        {
+            var lots = MarketService.GetLots(null);
+            return View(lots);
         }
     }
 }

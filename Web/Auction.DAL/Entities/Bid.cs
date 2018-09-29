@@ -19,8 +19,7 @@ namespace Auction.DAL.Entities
         public decimal Price { get; set; }
         [Required]
         public DateTime Time { get; set; }
-        [ForeignKey("LotId")]
+        [Required]
         public Lot Lot { get; set; }
-        public int? LotId { get; set; }
     }
 }

@@ -1,17 +1,12 @@
 ﻿using Auction.BLL.Infrastructure;
-using Auction.DAL.EF;
+using Auction.Web.Util;
+using AutoMapper;
 using Ninject;
 using Ninject.Web.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+using System.Globalization;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Auction.Web.Util;
-using AutoMapper;
 
 namespace Auction.Web
 {
@@ -19,8 +14,13 @@ namespace Auction.Web
     {
         protected void Application_Start()
         {
-            Database.SetInitializer<MarketContext>(new MarketContextInitializer());
+            
             AreaRegistration.RegisterAllAreas();
+            ModelBinders.Binders.Add(typeof(decimal), new DecimalModelBinder());
+            var cultureInfo = new CultureInfo("en-US");
+            cultureInfo.NumberFormat.NumberDecimalSeparator = ".";
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
@@ -31,6 +31,7 @@ namespace Auction.Web
             ControllerModule controller = new ControllerModule();
             var kernel = new StandardKernel(service, controller);
             DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
+
             ModelValidatorProviders.Providers.Clear();
             //FluentValidationModelValidatorProvider.Configure(provider => provider.AddImplicitRequiredValidator = false);
         }
