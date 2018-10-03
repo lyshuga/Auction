@@ -73,7 +73,7 @@ namespace Auction.Web.Controllers
         public async Task<ActionResult> LotDetails(int id)
         {
             var lot = await MarketService.GetLotAsync(id);
-            var lastBid = lot.Bids.LastOrDefault();
+            //var lastBid = lot.Bids.LastOrDefault();
             var bidderId = User.Identity.GetUserId();
             DetailsLotModel model = new DetailsLotModel()
             {
@@ -84,16 +84,16 @@ namespace Auction.Web.Controllers
                 GoodType = lot.GoodType,
                 StartDate = lot.StartDate,
                 ExpireDate = lot.ExpireDate,
-                Price = lastBid?.Price ?? lot.StartPrice,
+                //Price = lastBid?.Price ?? lot.StartPrice,
                 LastBid = lot.Bids.LastOrDefault(),
                 SellerName =  lot.Seller.Name,
-                BidderName = lastBid?.Bidder.Name,
+                //BidderName = lastBid?.Bidder.Name,
                 BidderId = bidderId
             };
             return View(model);
         }
         [HttpGet]
-        public ActionResult GetPrice(int? id)
+        public async Task<ActionResult> GetPrice(int? id)
         {
             if (id == null)
             {
@@ -102,11 +102,24 @@ namespace Auction.Web.Controllers
             else
             {
                 var bid = MarketService.FindBid(id.Value);
-                var bidResponse = new BidRequestModel()
+                BidRequestModel bidResponse;
+                if (bid == null)
                 {
-                    BidderId = bid.Bidder.Id,
-                    Price = bid.Price
-                };
+                    var lot = await MarketService.GetLotAsync(id.Value);
+                    bidResponse = new BidRequestModel()
+                    {
+                        BidderId = lot.Seller.Id,
+                        Price = lot.StartPrice
+                    };
+                }
+                else
+                {
+                    bidResponse = new BidRequestModel()
+                    {
+                        BidderId = bid.Bidder.Id,
+                        Price = bid.Price
+                    };
+                }
                 return Json(bidResponse, JsonRequestBehavior.AllowGet);
             }
         }

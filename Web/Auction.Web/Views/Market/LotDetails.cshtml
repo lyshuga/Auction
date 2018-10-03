@@ -4,6 +4,7 @@
     ViewBag.Title = "LotDetails";
 }
 <script>
+    getLotPrice();
     var intervalOfUpdate = 1000;
     var isInputFocused = false;
     setInterval(getLotPrice, intervalOfUpdate);
@@ -19,7 +20,7 @@
                     this.responseText;
             }
         };
-        xhttp.open("POST", "http://localhost:57840/Market/MakeBid", true);
+        xhttp.open("POST", "http://localhost/Market/MakeBid", true);
         xhttp.setRequestHeader('Content-Type', 'application/json');
         xhttp.send(requestBody);
         isInputFocused = false;
@@ -47,7 +48,7 @@
                         jsonObj.Price;
                 }
             };
-            xhttp.open("GET", "http://localhost:57840/Market/GetPrice/" + @Model.Id, true);
+            xhttp.open("GET", "http://localhost/Market/GetPrice/" + @Model.Id, true);
             xhttp.send();
         }
     }

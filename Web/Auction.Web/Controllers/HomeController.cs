@@ -17,7 +17,7 @@ namespace Auction.Web.Controllers
         }
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("AllLots", "Market");
         }
 
         public ActionResult About()
