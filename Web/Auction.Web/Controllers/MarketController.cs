@@ -10,7 +10,6 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.Owin.Security.Provider;
 
 namespace Auction.Web.Controllers
 {

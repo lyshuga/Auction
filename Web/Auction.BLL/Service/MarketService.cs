@@ -68,7 +68,6 @@ namespace Auction.BLL.Service
 
         public async Task<ApplicationProfileDTO> GetProfile(string userID)
         {
-            var profiles = Database.Profiles.GetAll();
             var foundProfile = await Database.Profiles.Get(userID);
             return Mapper.Map<ApplicationProfile, ApplicationProfileDTO>(foundProfile);
         }

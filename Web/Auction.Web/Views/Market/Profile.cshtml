@@ -18,11 +18,12 @@
         <td>@Html.DisplayFor(model => item.Name)</td>
         <td>@Html.DisplayFor(model => item.Description)</td>
         <td><img src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(item.Photo))" height="200" width="200" class="img-responsive" /></td>
-        <td>@Html.DisplayFor(model => item.StartPrice)</td>
+        @{ var price = item.Bids.Any() ? item.Bids.Last().Price : item.StartPrice; }
+        <td>@Html.DisplayFor(model => price)</td>
         <td>
             @Html.ActionLink("Details", "LotDetails", new { id = item.Id }, htmlAttributes: new { @class = ".btn-primary" })
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </td>
 
     </tr>
 

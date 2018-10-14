@@ -8,16 +8,16 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li>
-                @Html.ActionLink("Hello, " + User.Identity.GetUserName() + "!", "Profile", "Market", routeValues: null, htmlAttributes: new { title = "Profile" })
+                @Html.ActionLink(User.Identity.GetUserName(), "Profile", "Market", routeValues: null, htmlAttributes: new { title = "Profile", @class = "nav-item" })
             </li>
-            <li><a href="javascript:document.getElementById('logOutForm').submit()">Log Out</a></li>
+            <li><a href="javascript:document.getElementById('logOutForm').submit()" class="nav-item">Log Out</a></li>
         </ul>
     }
 }
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Login", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-item" })</li>
+        <li>@Html.ActionLink("Login", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-item" })</li>
     </ul>
 }
